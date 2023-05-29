@@ -1,12 +1,14 @@
 
 
-<h1> This is the page of a pigeon </h1>
+<h1> My sweet pigeon(s) </h1>
 
 <div class="card-product">
   <img src="https://pbs.twimg.com/media/CBib7ckUgAAHAJ_?format=jpg&name=small" />
   <div class="card-product-infos">
     <h2>My Pigeon</h2>
     <h2> <%= @pigeon.name  %></h2>
-    <p> Hey ! this is my favourite pigeon; it is very polite.</p>
+    <p><%= @pigeon.description %></p>
+    <p>It has a capacity of <%= @pigeon.maximum_payload_weight %> grammes and a maximum ranges of <%= @pigeon.range %> kilometers</p>
+
   </div>
 </div>
