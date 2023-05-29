@@ -2,10 +2,15 @@
 
 <div class="row">
   <div class="col-4">
-    <ul class="list-unstyled row align-items-stretch">
+    <ul class="list-unstyled row align-items-stretch"
+        data-controller="map"
+        data-map-access-token-value=<%= ENV["MAPBOX_ACCESS_TOKEN"] %>>
       <% @pigeons.each do |pigeon| %>
         <li class="col-6">
-          <div class="card">
+          <div class="card"
+               data-map-target="pigeon"
+               data-latitude=<%= pigeon.latitude %>
+               data-longitude=<%= pigeon.longitude %>>
             <%# <img src="..." class="card-img-top" alt="..."> %>
             <div class="card-body">
               <h5 class="card-title"><%= pigeon.name %></h5>
@@ -17,7 +22,5 @@
       <% end %>
     </ul>
   </div>
-  <div class="col-8">
-
-  </div>
+  <div class="col-8" id="map"></div>
 </div>
