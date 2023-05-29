@@ -8,5 +8,17 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 70px;
+}
+
+.navbar-brand img {
+  border-radius: 10%;
+  margin-left: 1em;
+}
+
+.btn-login {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 2em;
+  border-radius: 5px;
 }
