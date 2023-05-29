@@ -4,4 +4,12 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+
+# User.create(email: 'michel@michel.com', first_name: "michel", last_name: "michel", password: "aexifr")
+# User.create(email: 'alex@michel.com', first_name: "alex", last_name: "alex", password: "aexifr")
+# # User.create(email: 'luke@michel.com', first_name: "luke", last_name: "luke", password: "aexifr")
+
+
+# Pigeon.create(name: "Luke", user_id: 1)
+# Pigeon.create(name: "alex", user_id: 2)
+# Pigeon.create(name: "michel", user_id: 3)
