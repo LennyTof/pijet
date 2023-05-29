@@ -1,0 +1,12 @@
+<div class="container">
+<h2>Tell us more about your pigeon</h2>
+<%= simple_form_for(@pigeon) do |f| %>
+<%= f.input :name %>
+<%= f.input :maximum_payload_weight %>
+<%= f.input :range %>
+<%= f.input :description %>
+<%= f.input :address %>
+<%= f.input :photo, as: :file %>
+<%= f.submit %>
+<% end %>
+</div>

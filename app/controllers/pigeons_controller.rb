@@ -10,9 +10,20 @@ class PigeonsController < ApplicationController
     @pigeon = Pigeon.find(params[:id])
   end
 
+  def new
+    @pigeon = Pigeon.new
+  end
+
+  def create
+    @pigeon = Pigeon.new(pigeon_params)
+    @pigeon.user = current_user
+    @pigeon.save
+    redirect_to pigeon_path(@pigeon)
+  end
+
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:name, :maximum_payload_weight, :range, :description, :latitude, :longitude, :address)
+    params.require(:pigeon).permit(:name, :maximum_payload_weight, :range, :description, :address, :photo)
   end
 end
