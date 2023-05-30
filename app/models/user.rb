@@ -7,4 +7,7 @@ class User < ApplicationRecord
   has_many :pigeons
   has_many :rentals
   has_many :reviews
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end
