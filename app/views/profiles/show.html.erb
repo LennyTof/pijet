@@ -1,13 +1,13 @@
 <div class="container">
 
-<h1>Good to see you <%= @user.first_name %>!</h1>
+<h1>Good to see you <%= @user.first_name.capitalize %>!</h1>
 
 
 <h2>Your infos:</h2>
 <ul>
-<li>First name: <%= @user.first_name %></li>
-<li>Last name: <%= @user.last_name %></li>
-<li>email: <%= @user.email %></li>
+<li>First name: <strong> <%= @user.first_name.capitalize %></strong></li>
+<li>Last name:  <strong>  <%= @user.last_name.capitalize %></strong></li>
+<li>Email:  <strong>  <%= @user.email %></strong></li>
 
 </ul>
 <a class="btn btn-outline-primary btn-sm" href="/users/edit">Edit your infos</a>
@@ -27,7 +27,7 @@
 
 <hr>
 
-<h2>Rental in progress:</h2>
+<h2>Current rental:</h2>
 
 <hr>
 
