@@ -50,6 +50,7 @@ france_coordinates = [
       address: Faker::Address.full_address,
       latitude: coords[0],
       longitude: coords[1],
+      price: (rand * 100).floor,
       user: new_user
     )
     file = URI.parse(Faker::LoremFlickr.image(size: "400x400", search_terms: ['pigeon'])).open
