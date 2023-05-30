@@ -1,5 +1,3 @@
-require "dotenv/load"
-
 class PigeonsController < ApplicationController
   def index
     @mapbox_access_token = ENV["MAPBOX_ACCESS_TOKEN"]

@@ -1,15 +1,13 @@
-<h1> My sweet pigeon(s) </h1>
+<h1> My sweet pigeon </h1>
 
 <div class="card-product">
-  <img src="https://pbs.twimg.com/media/CBib7ckUgAAHAJ_?format=jpg&name=small" />
+  <%= cl_image_tag("lennyrolls", crop: :fill) %>
   <div class="card-product-infos">
     <h2>My Pigeon</h2>
     <h2> <%= @pigeon.name  %></h2>
     <p><%= @pigeon.description %></p>
     <p>It has a capacity of <%= @pigeon.maximum_payload_weight %> grammes and a maximum ranges of <%= @pigeon.range %> kilometers</p>
-
+    <%= cl_image_tag @pigeon.photo.key, height: 300, width: 400, crop: :fill %>
+    <button type="button" class="btn btn-primary">Book this pigeon</button>
   </div>
 </div>
-
-<%= cl_image_tag("lennyrolls",
-      width: 400, height: 300, crop: :fill) %>
