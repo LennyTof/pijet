@@ -42,18 +42,24 @@ export default class extends Controller {
         .setLngLat(coords)
         .addTo(this.map);
       bounds.extend(coords);
-      this.registerEventListeners(pigeonTarget, mapboxMarker)
+      this.registerEventListeners(pigeonTarget, mapboxMarker.getElement())
     })
 
     this.map.fitBounds(bounds, { padding: 50 });
   }
 
-  registerEventListeners(pigeonTarget, marker) {
-    let markerPath = marker.getElement().querySelector("path");
+  registerEventListeners(pigeonTarget, markerElement) {
+    let markerPath = markerElement.querySelector("path");
     pigeonTarget.addEventListener("mouseenter", () => {
       markerPath.setAttribute("fill", "#DC2626");
     });
-    pigeonTarget.addEventListener("mouseleave", (event) => {
+    pigeonTarget.addEventListener("mouseleave", () => {
+      markerPath.setAttribute("fill", "#3FB1CE");
+    });
+    markerElement.addEventListener("mouseenter", () => {
+      markerPath.setAttribute("fill", "#DC2626");
+    });
+    markerElement.addEventListener("mouseleave", () => {
       markerPath.setAttribute("fill", "#3FB1CE");
     });
   }
