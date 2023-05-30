@@ -4,7 +4,10 @@ import mapboxgl from 'mapbox-gl'
 export default class extends Controller {
 
   static targets = ["pigeon", "mapOverlay"]
-  static values = { accessToken: String }
+  static values = {
+    accessToken: String,
+    markers: Array
+  }
 
   connect() {
     this.drawMap();
@@ -29,14 +32,18 @@ export default class extends Controller {
   drawMarkers() {
     let bounds = new mapboxgl.LngLatBounds();
 
-    this.pigeonTargets.forEach(pigeonTarget => {
-      const coords = [pigeonTarget.dataset.longitude, pigeonTarget.dataset.latitude]
-      const marker = new mapboxgl.Marker()
+    this.pigeonTargets.forEach((pigeonTarget, index) => {
+      const coords = [pigeonTarget.dataset.longitude, pigeonTarget.dataset.latitude];
+
+      const markerElement = document.createElement("div");
+      markerElement.innerHTML = this.markersValue[index];
+
+      const mapboxMarker = new mapboxgl.Marker(markerElement)
         .setLngLat(coords)
         .addTo(this.map);
       bounds.extend(coords);
-      this.registerEventListeners(pigeonTarget, marker)
-    });
+      this.registerEventListeners(pigeonTarget, mapboxMarker)
+    })
 
     this.map.fitBounds(bounds, { padding: 50 });
   }

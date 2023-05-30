@@ -4,6 +4,7 @@ class PigeonsController < ApplicationController
   def index
     @mapbox_access_token = ENV["MAPBOX_ACCESS_TOKEN"]
     @pigeons = Pigeon.all
+    @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: {pigeon: pigeon}) }
   end
 
   def show
