@@ -1,0 +1,87 @@
+.category-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.category-item {
+  flex: 0 0 30%;
+}
+
+.category-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.category-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: rgb(200, 194, 194);
+}
+
+.category-selector:checked + label {
+  color: white !important;
+}
+
+
+#pigeon_maximum_payload_weight_10g_ex_1_usb_key + label {
+  color: black;
+}
+
+#pigeon_maximum_payload_weight_10g_ex_1_usb_key:checked + label {
+  background-color: lightgray;
+  border-color: black;
+}
+
+
+#pigeon_maximum_payload_weight_20g_ex_1_sim_card + label {
+  color: black;
+}
+
+#pigeon_maximum_payload_weight_20g_ex_1_sim_card:checked + label {
+  background-color: lightgray;
+  border-color: black;
+}
+
+
+#pigeon_maximum_payload_weight_30g_ex_3_usb_keys + label {
+  color: black;
+}
+
+#pigeon_maximum_payload_weight_30g_ex_3_usb_keys:checked + label {
+  background-color: lightgray;
+  border-color: black;
+}
+
+#pigeon_maximum_payload_weight_40g_ex_22_parchment_papers + label {
+  color: black;
+}
+
+#pigeon_maximum_payload_weight_40g_ex_22_parchment_papers:checked + label {
+  background-color: lightgray;
+  border-color: black;
+}
+
+#pigeon_maximum_payload_weight_50g_ex_1_ssd_hard_drive + label {
+  color: black;
+}
+
+#pigeon_maximum_payload_weight_50g_ex_1_ssd_hard_drive:checked + label {
+  background-color: lightgray;
+  border-color: black;
+}
+
+#pigeon_maximum_payload_weight_60g_ex_1_ssd_hard_drive__1_usb_key + label {
+  color: black;
+}
+#pigeon_maximum_payload_weight_60g_ex_1_ssd_hard_drive__1_usb_key:checked + label {
+  background-color: lightgray;
+  border-color: black;
+}
