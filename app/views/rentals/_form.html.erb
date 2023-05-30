@@ -1,0 +1,36 @@
+<div class="container border shadow bg-white rounded-4 p-4">
+  <h2><%= pigeon.price %>€ per day</h2>
+
+  <%= simple_form_for rental, url: book_path(pigeon) do |f| %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.association :payload_type %>
+    <%= f.submit "Book #{pigeon.name}", class: "mt-3 btn btn-lg btn-primary w-100" %>
+  <% end %>
+
+  <ul class="mt-5 list-unstyled">
+    <li class="mb-3 d-flex justify-content-between fs-5">
+      <div><%= pigeon.price %>€ x 5 days</div>
+      <div>750€</div>
+    </li>
+    <li class="mb-3 d-flex justify-content-between fs-5">
+      <div>Pigeon grooming</div>
+      <div>150€</div>
+    </li>
+    <li class="mb-3 d-flex justify-content-between fs-5">
+      <div>Pijet service fee</div>
+      <div>300€</div>
+    </li>
+    <li class="mb-3 d-flex justify-content-between fs-5">
+      <div>Taxes</div>
+      <div>30€</div>
+    </li>
+  </ul>
+
+  <hr>
+
+  <div class="d-flex justify-content-between fw-bold fs-5">
+    <div>Total</div>
+    <div>1800€</div>
+  </div>
+</div>

@@ -7,7 +7,8 @@ class PigeonsController < ApplicationController
   end
 
   def show
-   @user = current_user
+    @user = current_user
+    @rental = Rental.new
   end
 
   def new

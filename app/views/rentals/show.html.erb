@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Rental</h1>
+  <ul class="list-unstyled">
+    <% @rental.attributes.each do |key, value| %>
+      <li>
+        <strong><%= key %></strong>:
+        <%= value %>
+      </li>
+    <% end %>
+  </ul>
+</div>
