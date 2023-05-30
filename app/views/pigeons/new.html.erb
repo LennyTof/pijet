@@ -2,8 +2,8 @@
 <h2>Tell us more about your pigeon</h2>
 <%= simple_form_for(@pigeon) do |f| %>
 <%= f.input :name %>
-<%= f.input :maximum_payload_weight, label: 'Maximum payload weight (in grams)' %>
-<%= f.input :range, label: 'Range (in kilometers)' %>
+<%= f.input :maximum_payload_weight, collection: 10..50, label: 'Maximum payload weight (in grams)' %>
+<%= f.input :range, collection: 10..1000,  label: 'Range (in kilometers)' %>
 <%= f.input :description %>
 <%= f.input :address %>
 <%= f.input :photo, as: :file %>
