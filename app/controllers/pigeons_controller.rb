@@ -19,6 +19,25 @@ class PigeonsController < ApplicationController
     redirect_to pigeon_path(@pigeon)
   end
 
+  def edit
+    @pigeon = Pigeon.find(params[:id])
+  end
+
+  def update
+    @pigeon = Pigeon.find(params[:id])
+    if @pigeon.update(pigeon_params)
+      redirect_to @pigeon
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @pigeon = Pigeon.find(params[:id])
+    @pigeon.destroy
+    redirect_to root_path, status: :see_other
+  end
+
   private
 
   def pigeon_params
