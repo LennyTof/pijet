@@ -20,7 +20,9 @@
   <%= f.input :range, collection: 10..1000,  label: false, as: :range, input_html: { min:'10', max:'1000', data: { action: 'input->range#range', range_target: 'input'}}%>
 </div>
 <%= f.input :description %>
-<%= f.input :address %>
+<%= f.input :address,
+            input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+            wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_ACCESS_TOKEN"]}} %>
 <%= f.input :price, :label => "Price per day", input_html: { min: '0' }, placeholder: "Price in €" %>
 <%= f.input :photo, as: :file %>
 <%= f.submit %>
