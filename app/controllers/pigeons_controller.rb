@@ -6,10 +6,17 @@ class PigeonsController < ApplicationController
     @mapbox_access_token = ENV["MAPBOX_ACCESS_TOKEN"]
     @pigeons = Pigeon.all
     @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: { pigeon: }) }
+
+    if params[:search]
+      @pigeons = Pigeon.search(params[:search]).order("created_at DESC")
+    else
+      @pigeons = Pigeon.all.order("created_at DESC")
+    end
+
   end
 
   def show
-   @user = current_user
+    @user = current_user
   end
 
   def new
