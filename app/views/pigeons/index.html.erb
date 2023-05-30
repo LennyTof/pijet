@@ -2,6 +2,18 @@
   <meta name="turbo-visit-control" content="reload">
 <% end %>
 
+
+<div class="container text-center mt-4">
+  <%= form_tag(@pigeon_path, method: "get", id: "search-form", class: "form-inline") do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], placeholder: "Search pigeon", class: "form-control" %>
+      <div class="input-group-append">
+        <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+
 <div class="row g-0"
      data-controller="map"
      data-map-markers-value="<%= @markers.to_json %>"

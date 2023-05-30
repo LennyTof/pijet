@@ -15,6 +15,26 @@
 <br>
 <br>
 
+
+<%# search bar %>
+<div class="container text-center mt-4">
+  <%= form_tag(@pigeon_path, method: "get", id: "search-form", class: "form-inline") do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], placeholder: "Search pigeon", class: "form-control" %>
+      <div class="input-group-append">
+        <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+<br>
+<br>
+<br>
+
+
+
+<%# 6 random pigeon cards %>
+
 <div class="cards">
   <% @pigeons.sample(6).each do |pigeon| %>
     <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path(pigeon.photo.key, crop: :fill) %>); background-position: center; background-size: cover;">
@@ -25,3 +45,11 @@
     </div>
   <% end %>
 </div>
+<br>
+<br>
+<br>
+
+
+<%# link to index of all pigeons %>
+
+<a class="btn btn-flat" href="/pigeons/">Browse through all pigeons</a>
