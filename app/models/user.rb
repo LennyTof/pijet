@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :pigeons, dependent: :destroy
   has_many :rentals
   has_many :reviews
+  has_one_attached :photo
 
   validates :first_name, presence: true
   validates :last_name, presence: true
