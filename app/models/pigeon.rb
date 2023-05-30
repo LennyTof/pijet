@@ -3,4 +3,8 @@ class Pigeon < ApplicationRecord
   belongs_to :user
   has_many :rentals
   validates :name, :maximum_payload_weight, :range, :description, :price, presence: true
+
+  def self.search(search)
+    where("name ILIKE ?", "%#{search}%")
+  end
 end

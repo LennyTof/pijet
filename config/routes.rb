@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :pigeons
   resources :rentals, only: %i[show destroy]
   post "pigeons/:id/book", to: "rentals#create", as: :book
+  resources :profiles, only: [:show]
 end
