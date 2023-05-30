@@ -3,7 +3,7 @@ class PigeonsController < ApplicationController
   before_action :find_pigeon, only: %i[show edit update destroy]
 
   def index
-    @mapbox_access_token = ENV["MAPBOX_ACCESS_TOKEN"]
+    @mapbox_access_token = ENV.fetch("MAPBOX_ACCESS_TOKEN", nil)
     @pigeons = Pigeon.all
     @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: { pigeon: }) }
 
@@ -12,7 +12,6 @@ class PigeonsController < ApplicationController
     else
       @pigeons = Pigeon.all.order("created_at DESC")
     end
-
   end
 
   def show
