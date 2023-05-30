@@ -52,7 +52,7 @@ class PigeonsController < ApplicationController
   private
 
   def pigeon_params
-    params.require(:pigeon).permit(:name, :maximum_payload_weight, :range, :description, :address, :photo)
+    params.require(:pigeon).permit(:name, :maximum_payload_weight, :range, :description, :address, :photo, :price)
   end
 
   def find_pigeon

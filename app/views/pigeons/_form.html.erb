@@ -9,6 +9,7 @@
 </div>
 <%= f.input :description %>
 <%= f.input :address %>
+<%= f.input :price, :label => "Price per day", input_html: { min: '0' }, placeholder: "Price in €" %>
 <%= f.input :photo, as: :file %>
 <%= f.submit %>
 <% end %>
