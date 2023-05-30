@@ -4,6 +4,7 @@
 
 <div class="row g-0"
      data-controller="map"
+     data-map-markers-value="<%= @markers.to_json %>"
      data-map-access-token-value=<%= ENV["MAPBOX_ACCESS_TOKEN"] %>>
   <div class="col-6">
     <div class="container">
@@ -13,9 +14,9 @@
           <li class="col-6">
             <%= link_to pigeon_path(pigeon), class: "text-decoration-none text-black" do %>
               <div class="card h-100"
-                  data-map-target="pigeon"
-                  data-latitude=<%= pigeon.latitude %>
-                  data-longitude=<%= pigeon.longitude %>>
+                   data-map-target="pigeon"
+                   data-latitude=<%= pigeon.latitude %>
+                   data-longitude=<%= pigeon.longitude %>>
                 <%= image_tag pigeon.photo, class: "card-img-top" %>
                 <div class="card-body">
                   <h5 class="card-title"><%= pigeon.name %></h5>
