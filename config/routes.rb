@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :pigeons
+  resources :profiles, only: [:show]
 end
