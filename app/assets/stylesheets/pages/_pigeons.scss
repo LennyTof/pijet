@@ -1,0 +1,16 @@
+#map-overlay {
+  position: sticky;
+  top: $navbar-height;
+  height: calc(100vh - #{$navbar-height});
+  z-index: 10;
+  background-color: $light-gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#map {
+  height: calc(100vh - #{$navbar-height});
+  position: sticky;
+  top: $navbar-height;
+}
