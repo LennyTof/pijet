@@ -5,6 +5,13 @@ Faker::Config.locale = :fr
 
 puts "Seeding database..."
 User.destroy_all
+PayloadType.destroy_all
+
+PayloadType.create!(name: "Paper", weight: 5)
+PayloadType.create!(name: "SD card", weight: 7)
+PayloadType.create!(name: "USB key", weight: 15)
+PayloadType.create!(name: "Hard drive", weight: 500)
+PayloadType.create!(name: "Storage server", weight: 50_000)
 
 france_coordinates = [
   [48.840604, 2.415190],
@@ -50,6 +57,7 @@ france_coordinates = [
       address: Faker::Address.full_address,
       latitude: coords[0],
       longitude: coords[1],
+      price: (rand * 100).floor,
       user: new_user
     )
     file = URI.parse(Faker::LoremFlickr.image(size: "400x400", search_terms: ['pigeon'])).open

@@ -1,19 +1,29 @@
-<h1> My sweet pigeon </h1>
+<div class="container pt-3">
+  <h1><%= @pigeon.name %></h1>
+  <div class="row">
+    <div class="col-6">
+      <%= cl_image_tag @pigeon.photo.key, crop: :fill, class: "w-100 rounded-4" %>
+    </div>
+    <div class="col-6">
+      <%= render "rentals/form", rental: @rental, pigeon: @pigeon %>
+    </div>
+  </div>
 
-<div class="card-product">
-  <%= cl_image_tag @pigeon.photo.key, height: 300, width: 400, crop: :fill %>
-  <div class="card-product-infos">
-    <h2>My Pigeon</h2>
-    <h2> <%= @pigeon.name  %></h2>
-    <p><%= @pigeon.description %></p>
-    <p>It has a capacity of <%= @pigeon.maximum_payload_weight %> grammes and a maximum ranges of <%= @pigeon.range %> kilometers</p>
-    <button type="button" class="btn btn-primary">Book this pigeon</button>
-    <% if @user == @pigeon.user %>
-    <%= link_to "Edit", edit_pigeon_path(@pigeon), class:"btn btn-primary" %>
-    <%= link_to "Destroy", pigeon_path(@pigeon), class:"btn btn-outline-danger", data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-    <% end %>
+  <div class="card-product mt-5">
+    <%= cl_image_tag @pigeon.photo.key, height: 300, width: 400, crop: :fill %>
+    <div class="card-product-infos">
+      <h2>My Pigeon</h2>
+      <h2> <%= @pigeon.name  %></h2>
+      <p><%= @pigeon.description %></p>
+      <p>It has a capacity of <%= @pigeon.maximum_payload_weight %> grammes and a maximum ranges of <%= @pigeon.range %> kilometers</p>
+      <button type="button" class="btn btn-primary">Book this pigeon</button>
+      <% if @user == @pigeon.user %>
+      <%= link_to "Edit", edit_pigeon_path(@pigeon), class:"btn btn-primary" %>
+      <%= link_to "Destroy", pigeon_path(@pigeon), class:"btn btn-outline-danger", data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+      <% end %>
+    </div>
   </div>
 </div>
