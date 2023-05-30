@@ -8,9 +8,12 @@
     <p><%= @pigeon.description %></p>
     <p>It has a capacity of <%= @pigeon.maximum_payload_weight %> grammes and a maximum ranges of <%= @pigeon.range %> kilometers</p>
     <button type="button" class="btn btn-primary">Book this pigeon</button>
+    <% if @user == @pigeon.user %>
     <%= link_to "Edit", edit_pigeon_path(@pigeon), class:"btn btn-primary" %>
-    <%= link_to "Destroy", pigeon_path(@pigeon), data: {
+    <%= link_to "Destroy", pigeon_path(@pigeon), class:"btn btn-outline-danger", data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
-                  } %> </div>
+                  } %>
+    <% end %>
+  </div>
 </div>
