@@ -15,7 +15,16 @@
 <hr>
 
 <h2>Your pigeons:</h2>
-<%= current_user.pigeons.first.name %>
+  <% if current_user.pigeons.exists? %>
+    <% current_user.pigeons.each do |pigeon| %>
+    <ul>
+      <li><%= pigeon.name %></li>
+    </ul>
+    <% end %>
+  <% else %>
+    <p>You don't have any pigeons...</p>
+  <% end %>
+
 
 
 <hr>
