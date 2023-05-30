@@ -1,6 +1,12 @@
+$navbar-height: 75px;
+
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: $navbar-height;
 }
 
 .navbar-lewagon .navbar-collapse {
