@@ -1,5 +1,6 @@
 class PigeonsController < ApplicationController
   before_action :authenticate_user!, only: :new
+  
   def index
     @mapbox_access_token = ENV["MAPBOX_ACCESS_TOKEN"]
     @pigeons = Pigeon.all
