@@ -17,7 +17,7 @@ class PigeonsController < ApplicationController
 
   def show
     @user = current_user
-    @rental = Rental.new
+    @rental = Rental.new(service_fee_per_day: 10, tax_rate: 0.2)
   end
 
   def new

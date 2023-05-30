@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_30_120821) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_154015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,11 +61,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_120821) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price"
+    t.integer "grooming_fee"
     t.index ["user_id"], name: "index_pigeons_on_user_id"
   end
 
   create_table "rentals", force: :cascade do |t|
-    t.integer "price"
+    t.float "price"
     t.float "payload_weight"
     t.date "start_date"
     t.date "end_date"
@@ -75,6 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_120821) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "service_fee_per_day"
+    t.float "tax_rate"
     t.index ["payload_type_id"], name: "index_rentals_on_payload_type_id"
     t.index ["pigeon_id"], name: "index_rentals_on_pigeon_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"

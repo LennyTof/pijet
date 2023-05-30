@@ -1,29 +1,51 @@
-<div class="container border shadow bg-white rounded-4 p-4">
+<div class="container border shadow bg-white rounded-4 p-4"
+     data-controller="book-form"
+     data-book-form-price-value=<%= pigeon.price %>
+     data-book-form-grooming-value=<%= pigeon.grooming_fee %>
+     data-book-form-service-value=<%= rental.service_fee_per_day %>
+     data-book-form-tax-value=<%= rental.tax_rate %>
+     >
   <h2><%= pigeon.price %>€ per day</h2>
 
-  <%= simple_form_for rental, url: book_path(pigeon) do |f| %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+  <%= simple_form_for rental, url: book_path(pigeon), data: { action: "change->book-form#update" } do |f| %>
+    <div class="d-flex">
+      <%= f.input :start_date,
+        as: :string,
+        wrapper_html: {  class: "flex-grow-1 me-2" },
+        input_html: { data: { controller: "datepicker", book_form_target: "startDate" } } %>
+      <%= f.input :end_date,
+        as: :string,
+        wrapper_html: {  class: "flex-grow-1 ms-2" },
+        input_html: { data: { controller: "datepicker", book_form_target: "endDate" } } %>
+    </div>
     <%= f.association :payload_type %>
     <%= f.submit "Book #{pigeon.name}", class: "mt-3 btn btn-lg btn-primary w-100" %>
   <% end %>
 
   <ul class="mt-5 list-unstyled">
     <li class="mb-3 d-flex justify-content-between fs-5">
-      <div><%= pigeon.price %>€ x 5 days</div>
-      <div>750€</div>
+      <div><%= pigeon.price %>€ x <span data-book-form-target="nbOfDays"></span> days</div>
+      <div>
+        <span data-book-form-target="rental"></span>€
+      </div>
     </li>
     <li class="mb-3 d-flex justify-content-between fs-5">
       <div>Pigeon grooming</div>
-      <div>150€</div>
+     <div>
+        <span data-book-form-target="grooming"><%= pigeon.grooming_fee %></span>€
+      </div>
     </li>
     <li class="mb-3 d-flex justify-content-between fs-5">
       <div>Pijet service fee</div>
-      <div>300€</div>
+      <div>
+        <span data-book-form-target="service"></span>€
+      </div>
     </li>
     <li class="mb-3 d-flex justify-content-between fs-5">
       <div>Taxes</div>
-      <div>30€</div>
+      <div>
+        <span data-book-form-target="tax"></span>€
+      </div>
     </li>
   </ul>
 
@@ -31,6 +53,8 @@
 
   <div class="d-flex justify-content-between fw-bold fs-5">
     <div>Total</div>
-    <div>1800€</div>
+    <div>
+      <span data-book-form-target="total"></span>€
+    </div>
   </div>
 </div>
