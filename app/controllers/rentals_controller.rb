@@ -19,6 +19,8 @@ class RentalsController < ApplicationController
   end
 
   def show
+    @rental = Rental.find(params[:id])
+    @review = Review.new
   end
 
   private
