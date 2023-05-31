@@ -22,7 +22,7 @@
                    data-latitude=<%= pigeon.latitude %>
                    data-longitude=<%= pigeon.longitude %>>
                 <div class="card-img-container">
-                  <%= image_tag pigeon.photo, class: "card-img-top" %>
+                  <%= cl_image_tag pigeon.photo.key, crop: :fill, class: "card-img-top" %>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title fw-bold"><%= pigeon.name %></h5>
