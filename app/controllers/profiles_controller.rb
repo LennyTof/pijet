@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_pigeon, only: %i[show edit update destroy]
+  # before_action :find_pigeon, only: %i[show edit update destroy]
 
   def show
     @user = User.find(params[:id])
@@ -15,6 +15,6 @@ end
 
 private
 
-def find_pigeon
-  @pigeon = Pigeon.find(params[:id])
-end
+# def find_pigeon
+#   @pigeon = Pigeon.find(params[:id])
+# end
