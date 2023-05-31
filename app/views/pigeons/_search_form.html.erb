@@ -1,0 +1,22 @@
+<div class="search-form mt-4">
+  <%= form_with url: pigeons_path,
+                method: :get,
+                id: "search-form",
+                class: "row w-100 g-0 flex-nowrap" do |f| %>
+    <div class="col-3">
+      <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+    </div>
+    <div class="col flex-shrink-1" data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%=ENV["MAPBOX_ACCESS_TOKEN"]%>">
+      <%= f.text_field :address,
+        class: "d-none",
+        placeholder: "Address",
+        data: {
+          address_autocomplete_target: "address",
+        }
+      %>
+    </div>
+    <div class="col">
+      <%= f.submit "Search", class: "btn btn-flat" %>
+    </div>
+  <% end %>
+</div>

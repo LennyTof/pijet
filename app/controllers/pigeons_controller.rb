@@ -4,14 +4,12 @@ class PigeonsController < ApplicationController
 
   def index
     @mapbox_access_token = ENV.fetch("MAPBOX_ACCESS_TOKEN", nil)
-    @pigeons = Pigeon.all
-    @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: { pigeon: }) }
+    @pigeons = Pigeon.all.geocoded
 
-    if params[:search]
-      @pigeons = Pigeon.search(params[:search]).order("created_at DESC")
-    else
-      @pigeons = Pigeon.all.order("created_at DESC")
-    end
+    @pigeons = @pigeons.where("name ILIKE ?", "%#{params[:name]}%").order("created_at DESC") unless params[:name].blank?
+    @pigeons = @pigeons.near(params[:address], 100) unless params[:address].blank?
+
+    @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: { pigeon: }) }
   end
 
   def show

@@ -10,8 +10,12 @@ export default class extends Controller {
   }
 
   connect() {
-    this.drawMap();
-    this.drawMarkers();
+    if(this.pigeonTargets.length) {
+      this.drawMap();
+      this.drawMarkers();
+    } else {
+      this.mapOverlayTarget.classList.add("d-none");
+    }
   }
 
   drawMap() {
