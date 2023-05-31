@@ -14,7 +14,7 @@
           <p><strong><%= @rental.pigeon.name %> range:</strong> <%= @rental.pigeon.range %> kilometers</p>
           <p><strong><%= @rental.pigeon.name %> belongs to: </strong> <%= @rental.pigeon.user.first_name %> <%= @rental.pigeon.user.last_name %></p>
           <p><strong><%= @rental.pigeon.name %> price per day:</strong> <%= @rental.pigeon.price %>€</p>
-          <p><strong>Payload type (max weight):</strong> <%= @rental.payload_type.name %> (<%= @rental.payload_type.weight %> grams max)</p>
+          <p><strong>Payload type (max weight):</strong> <%= @rental.payload_type.name %> (<%= @rental.payload_type.weight.to_i %> grams max)</p>
 
           <hr>
 
@@ -28,34 +28,37 @@
       </div>
     </div>
   </div>
-</div>
 
+  <br>
 
-<br>
-<div class="text-center">
-<% if @rental.reviews.length > 0 %>
-    <h1>You've already left a comment for this rental !</h1>
-    <li class="list-group-item">
-      <small>
-        <% count = 0 %>
-        <% 5.times do %>
-          <% if @rental.reviews.last.rating > count %>
-            <i class="fa-solid fa-star"></i>
-          <% else %>
-            <i class="fa-regular fa-star"></i>
+  <div class="text-center">
+  <% if @rental.reviews.length > 0 %>
+      <h1>You've already left a comment for this rental !</h1>
+      <li class="list-group-item">
+        <small>
+          <% count = 0 %>
+          <% 5.times do %>
+            <% if @rental.reviews.last.rating > count %>
+              <i class="fa-solid fa-star"></i>
+            <% else %>
+              <i class="fa-regular fa-star"></i>
+            <% end %>
+            <% count += 1 %>
           <% end %>
-          <% count += 1 %>
-        <% end %>
-      </small>
-      <br>
-      <strong> <%= @rental.reviews.last.comment.capitalize %> </strong>
-    </li>
-  <% else %>
-    <%= render "reviews/form", rental: @rental, review: @review %>
-  <% end %>
-  <br>
-  <br>
+        </small>
 
-<%= link_to "Book this pigeon again!", "/pigeons/#{@rental.pigeon.id}", class: "btn btn-primary" %>
+        <br>
 
+        <strong> <%= @rental.reviews.last.comment.capitalize %> </strong>
+      </li>
+    <% else %>
+      <%= render "reviews/form", rental: @rental, review: @review %>
+    <% end %>
+
+    <br>
+    <br>
+
+  <%= link_to "Book this pigeon again!", "/pigeons/#{@rental.pigeon.id}", class: "btn btn-primary" %>
+
+  </div>
 </div>
