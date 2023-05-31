@@ -1,7 +1,8 @@
 class Pigeon < ApplicationRecord
   belongs_to :user
   has_many :rentals
-
+  has_many :reviews, through: :rentals
+  
   validates :name, :maximum_payload_weight, :range, :description, :price, presence: true
 
   has_one_attached :photo
