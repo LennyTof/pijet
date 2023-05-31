@@ -23,9 +23,9 @@
     <% if current_user.pigeons.exists? %>
       <% current_user.pigeons.each do |pigeon| %>
       <ul>
-        <li><h3><%= pigeon.name %></h3></li>
+        <li><h3><%= pigeon.name.capitalize %></h3></li>
       </ul>
-      <p><strong>Description:</strong> <%= pigeon.description %></p>
+      <p><strong>Description:</strong> <%= pigeon.description.capitalize %></p>
       <p><strong>Address:</strong> <%= pigeon.address %></p>
       <p><strong>Maximum payload:</strong> <%= pigeon.maximum_payload_weight.to_i %> grams max</p>
       <p><strong>Range:</strong> <%= pigeon.range %> kilometers</p>
