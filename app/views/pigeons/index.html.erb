@@ -3,35 +3,29 @@
 <% end %>
 
 
-<div class="container text-center mt-4">
-  <%= form_tag(@pigeon_path, method: "get", id: "search-form", class: "form-inline") do %>
-    <div class="input-group">
-      <%= text_field_tag :search, params[:search], placeholder: "Search pigeon", class: "form-control" %>
-      <div class="input-group-append">
-        <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
-      </div>
-    </div>
-  <% end %>
-
-
 <div class="row g-0"
      data-controller="map"
      data-map-markers-value="<%= @markers.to_json %>"
      data-map-access-token-value=<%= ENV["MAPBOX_ACCESS_TOKEN"] %>>
   <div class="col-6">
     <div class="container">
-      <h1><%= @pigeons.count %> available pigeons</h1>
-      <ul class="list-unstyled row g-2">
+
+      <%= render "search_form" %>
+
+      <h4 class="mt-3"><%= @pigeons.size %> available pigeons</h4>
+      <ul id="pigeons" class="list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
         <% @pigeons.each do |pigeon| %>
-          <li class="col-6">
+          <li class="col">
             <%= link_to pigeon_path(pigeon), class: "text-decoration-none text-black" do %>
               <div class="card h-100"
                    data-map-target="pigeon"
                    data-latitude=<%= pigeon.latitude %>
                    data-longitude=<%= pigeon.longitude %>>
-                <%= image_tag pigeon.photo, class: "card-img-top" %>
+                <div class="card-img-container">
+                  <%= cl_image_tag pigeon.photo.key, crop: :fill, class: "card-img-top" %>
+                </div>
                 <div class="card-body">
-                  <h5 class="card-title"><%= pigeon.name %></h5>
+                  <h5 class="card-title fw-bold"><%= pigeon.name %></h5>
                   <p class="card-text"><%= pigeon.description %></p>
                 </div>
               </div>
