@@ -18,15 +18,15 @@ france_coordinates = JSON.parse(File.read("#{Rails.root}/db/france_coordinates.j
 pigeon_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/pigeons/*")
 user_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/users/*")
 
-100.times do
+10.times do
   user = User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: "#{Faker::Internet.username(specifier: 5..8)}-#{(rand * 1000).floor}@yopmail.com",
     password: "123456"
   )
-  # a user can have 0, 1, ... or 3 pigeons
-  (0..3).to_a.sample.times do
+  # a user can have 0, 1, ... or 10 pigeons
+  (0..10).to_a.sample.times do
     coords = france_coordinates.pop
     pigeon = Pigeon.create!(
       name: Faker::Name.first_name,
@@ -43,8 +43,6 @@ user_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/users/*")
     file = File.open(pigeon_picture_paths.sample)
     pigeon.photo.attach(io: file, filename: "#{pigeon.id}.", content_type: "image/jpeg")
   end
-
-  puts "#{User.count} users created" if (User.count % 10).zero?
 end
 
 puts "Database seeded with #{User.count} users and #{Pigeon.count} pigeons."
