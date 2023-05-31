@@ -31,16 +31,6 @@
 
 </div>
 
-<%# COMMENTED CODE BELOW %>
+<%= render "reviews/form", rental: @rental, review: @review %>
 
-  <% if false %>
-
-    <ul class="list-unstyled">
-      <% @rental.attributes.each do |key, value| %>
-        <li>
-          <strong><%= key %></strong>:
-          <%= value %>
-        </li>
-      <% end %>
-    </ul>
-   <% end %>
+<%= link_to "get back to index", pigeons_path %>

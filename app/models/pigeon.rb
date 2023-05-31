@@ -2,6 +2,8 @@ class Pigeon < ApplicationRecord
   has_one_attached :photo
   belongs_to :user
   has_many :rentals
+  has_many :reviews, through: :rentals
+  
   validates :name, :maximum_payload_weight, :range, :description, :price, presence: true
   WEIGHT = ["10g (ex: 1 USB key)",
             "20g (ex: 1 SIM CARD)",

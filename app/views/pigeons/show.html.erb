@@ -9,17 +9,10 @@
     </div>
   </div>
 
-
-
-
-
-
-
-
 <div class="card mt-5">
   <div class="card-body text-center">
     <p><%= @pigeon.description %></p>
-    <p>It has a capacity of <strong><%= @pigeon.maximum_payload_weight %></strong> grams and a maximum range of <strong><%= @pigeon.range %></strong> kilometers</p>
+    <p> <%= @pigeon.name %> has a capacity of <strong><%= @pigeon.maximum_payload_weight %></strong> grams and a maximum range of <strong><%= @pigeon.range %></strong> kilometers</p>
     <% if @user == @pigeon.user %>
       <%= link_to "Edit", edit_pigeon_path(@pigeon), class: "btn btn-primary" %>
       <%= link_to "Destroy", pigeon_path(@pigeon), class: "btn btn-outline-danger", data: {
@@ -29,3 +22,35 @@
     <% end %>
   </div>
 </div>
+
+<br>
+<h1> Rental history </h1>
+<br>
+
+
+    <p><% @pigeon.rentals.each do |rental| %></p>
+        Rental ID:
+        <%= rental.id  %>
+        Price:
+        <%= rental.price %>€
+        Duration:
+        <%= (rental.end_date - rental.start_date).to_i  %> days
+        <% if rental.reviews.length > 0 %>
+          <li class="list-group-item">
+            <small>
+              <% count = 0 %>
+              <% 5.times do %>
+                <% if rental.reviews.last.rating > count %>
+                  <i class="fa-solid fa-star"></i>
+                <% else %>
+                  <i class="fa-regular fa-star"></i>
+                <% end %>
+                <% count += 1 %>
+              <% end %>
+            </small>
+              <strong> <%= rental.reviews.last.comment %> </strong>
+          </li>
+        <% else %>
+          <p> <i> No review for this rental </i> </p>
+        <% end %>
+    <% end %>
