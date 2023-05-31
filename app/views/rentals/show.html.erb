@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Congratulation <%= @rental.user.first_name %>, you booked <%= @rental.pigeon.name %>!</h1>
+
 <hr>
 
   <div class="container pt-3">
@@ -13,14 +14,16 @@
           <p><strong><%= @rental.pigeon.name %> range:</strong> <%= @rental.pigeon.range %> kilometers</p>
           <p><strong><%= @rental.pigeon.name %> belongs to: </strong> <%= @rental.pigeon.user.first_name %> <%= @rental.pigeon.user.last_name %></p>
           <p><strong><%= @rental.pigeon.name %> price per day:</strong> <%= @rental.pigeon.price %>€</p>
-
-            <% if @rental.price.class == Float %>
-              <p><strong>Your total rental price: </strong> <%= @rental.price.to_i %>€</p>
-            <% else %>
-              <p><strong>Your total rental price: </strong> <%= @rental.price %>€</p>
-            <% end %>
-
           <p><strong>Payload type (max weight):</strong> <%= @rental.payload_type.name %> (<%= @rental.payload_type.weight %> grams max)</p>
+
+          <hr>
+
+          <% if @rental.price.class == Float %>
+            <p><strong>YOUR TOTAL RENTAL PRICE: </strong> <%= @rental.price.to_i %>€</p>
+          <% else %>
+            <p><strong>YOUR TOTAL RENTAL PRICE: </strong> <%= @rental.price %>€</p>
+          <% end %>
+
           <p><strong>Status:</strong> <%= @rental.status.capitalize %></p>
       </div>
     </div>
