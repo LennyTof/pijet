@@ -2,11 +2,11 @@
   <%= form_with url: pigeons_path,
                 method: :get,
                 id: "search-form",
-                class: "row w-100 g-0 flex-nowrap" do |f| %>
-    <div class="col-3">
+                class: "d-flex g-0 flex-nowrap" do |f| %>
+    <div class="">
       <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
     </div>
-    <div class="col flex-shrink-1" data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%=ENV["MAPBOX_ACCESS_TOKEN"]%>">
+    <div class="flex-grow-1" data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%=ENV["MAPBOX_ACCESS_TOKEN"]%>">
       <%= f.text_field :address,
         class: "d-none",
         placeholder: "Address",
@@ -15,7 +15,7 @@
         }
       %>
     </div>
-    <div class="col">
+    <div class="">
       <%= f.submit "Search", class: "btn btn-flat" %>
     </div>
   <% end %>

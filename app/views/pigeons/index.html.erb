@@ -7,7 +7,7 @@
      data-controller="map"
      data-map-markers-value="<%= @markers.to_json %>"
      data-map-access-token-value=<%= ENV["MAPBOX_ACCESS_TOKEN"] %>>
-  <div class="col-6">
+  <div class="col-12 col-sm-8">
     <div class="container">
 
       <%= render "search_form" %>
@@ -25,8 +25,18 @@
                   <%= cl_image_tag pigeon.photo.key, crop: :fill, class: "card-img-top" %>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title fw-bold"><%= pigeon.name %></h5>
-                  <p class="card-text"><%= pigeon.description %></p>
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title fw-bold"><%= pigeon.name %></h5>
+                    <span><i class="fa-solid fa-star text-info"></i> <%= pigeon.avg_rating %> (<%= pigeon.reviews.count %>)</span>
+                  </div>
+                  <p class="card-description">
+                    <%= pigeon.description %>
+                  </p>
+                </div>
+                <div class="card-footer">
+                  <p class="card-text">
+                    <strong><%= pigeon.price %>€</strong> per day
+                  </p>
                 </div>
               </div>
             <% end %>
@@ -35,7 +45,7 @@
       </ul>
     </div>
   </div>
-  <div class="col-6 position-relative">
+  <div class="d-none d-sm-block col-sm-4 position-relative">
     <div id="map-overlay" data-map-target="mapOverlay">
       <div class="spinner-border text-secondary" role="status">
         <span class="visually-hidden">Loading...</span>

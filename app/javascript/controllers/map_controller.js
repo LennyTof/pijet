@@ -53,18 +53,11 @@ export default class extends Controller {
   }
 
   registerEventListeners(pigeonTarget, markerElement) {
-    let markerPath = markerElement.querySelector("path");
     pigeonTarget.addEventListener("mouseenter", () => {
-      markerPath.setAttribute("fill", "#DC2626");
+      markerElement.querySelector(".price-marker").classList.add("active");
     });
     pigeonTarget.addEventListener("mouseleave", () => {
-      markerPath.setAttribute("fill", "#3FB1CE");
-    });
-    markerElement.addEventListener("mouseenter", () => {
-      markerPath.setAttribute("fill", "#DC2626");
-    });
-    markerElement.addEventListener("mouseleave", () => {
-      markerPath.setAttribute("fill", "#3FB1CE");
+      markerElement.querySelector(".price-marker").classList.remove("active");
     });
   }
 }
