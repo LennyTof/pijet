@@ -15,8 +15,17 @@ PayloadType.create!(name: "Storage server", weight: 50_000)
 
 france_coordinates = JSON.parse(File.read("#{Rails.root}/db/france_coordinates.json")).shuffle!
 
-pigeon_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/pigeons/*")
-user_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/users/*")
+pigeon_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/pigeons/*").shuffle!
+user_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/users/*").shuffle!
+
+counter = 0
+
+User.create!(
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name,
+  email: "admin@pijet.com",
+  password: "password"
+)
 
 10.times do
   user = User.create!(
@@ -40,8 +49,9 @@ user_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/users/*")
       grooming_fee: 100,
       user: user,
     )
-    file = File.open(pigeon_picture_paths.sample)
+    file = File.open(pigeon_picture_paths[counter % pigeon_picture_paths.length])
     pigeon.photo.attach(io: file, filename: "#{pigeon.id}.", content_type: "image/jpeg")
+    counter += 1
   end
 end
 

@@ -6,8 +6,21 @@ class PigeonsController < ApplicationController
     @mapbox_access_token = ENV.fetch("MAPBOX_ACCESS_TOKEN", nil)
     @pigeons = Pigeon.all.geocoded
 
-    @pigeons = @pigeons.where("name ILIKE ?", "%#{params[:name]}%").order("created_at DESC") unless params[:name].blank?
-    @pigeons = @pigeons.near(params[:address], 100) unless params[:address].blank?
+    if params[:name].present?
+      @pigeons = @pigeons.where("name ILIKE ?", "%#{params[:name]}%").order("created_at DESC")
+    end
+
+    if params[:address].present?
+      @pigeons = @pigeons.near(params[:address], 100)
+    end
+
+    if params[:start_date].present? && params[:end_date].present?
+      sql_query = "(rentals.start_date BETWEEN :start_date AND :end_date) OR
+        (rentals.end_date BETWEEN :start_date AND :end_date)"
+
+      booked_pigeons = Pigeon.joins(:rentals).where(sql_query, start_date: params[:start_date], end_date: params[:end_date]).uniq
+      @pigeons = @pigeons.excluding(booked_pigeons)
+    end
 
     @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: { pigeon: }) }
   end
@@ -15,6 +28,7 @@ class PigeonsController < ApplicationController
   def show
     @user = current_user
     @rental = Rental.new(service_fee_per_day: 10, tax_rate: 0.2)
+    @booked_dates = @pigeon.rentals.map { |rental| { from: rental.start_date, to: rental.end_date } }.uniq
     # @review = Review.find(params[:pigeon_id])
     # @pigeon.reviews = @review
   end
