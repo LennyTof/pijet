@@ -18,6 +18,10 @@ export default class extends Controller {
     }
   }
 
+  disconnect() {
+    this.map.remove();
+  }
+
   drawMap() {
     mapboxgl.accessToken = this.accessTokenValue;
     this.map = new mapboxgl.Map({
@@ -58,6 +62,12 @@ export default class extends Controller {
     });
     pigeonTarget.addEventListener("mouseleave", () => {
       markerElement.querySelector(".price-marker").classList.remove("active");
+    });
+    markerElement.addEventListener("mouseenter", () => {
+      pigeonTarget.classList.add("active");
+    });
+    markerElement.addEventListener("mouseleave", () => {
+      pigeonTarget.classList.remove("active");
     });
   }
 }

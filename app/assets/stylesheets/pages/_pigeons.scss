@@ -49,7 +49,8 @@
     transition: .2s ease;
   }
 
-  .card:hover {
+  .card:hover,
+  .card.active {
     background-color: $purple;
     color: white;
 
@@ -66,7 +67,7 @@
 
 .price-marker {
   border-radius: 30px;
-  border: 4px solid $purple;
+  border: 2px solid $purple;
   background-color: white;
   padding: 4px 12px;
   text-decoration: none;
