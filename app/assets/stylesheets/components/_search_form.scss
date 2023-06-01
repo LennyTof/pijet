@@ -16,6 +16,10 @@
     background-color: $light-gray;
   }
 
+  form input {
+    border-radius: 0px;
+  }
+
   form div:nth-child(1) input {
     border-radius: $border-radius-lg 0px 0px $border-radius-lg;
   }
