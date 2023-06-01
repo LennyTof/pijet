@@ -10,7 +10,7 @@ PayloadType.destroy_all
 PayloadType.create!(name: "Paper", weight: 5)
 PayloadType.create!(name: "SD card", weight: 7)
 PayloadType.create!(name: "USB key", weight: 15)
-PayloadType.create!(name: "Hard drive", weight: 500)
+PayloadType.create!(name: "SSD Hard drive", weight: 50)
 PayloadType.create!(name: "Storage server", weight: 50_000)
 
 france_coordinates = JSON.parse(File.read("#{Rails.root}/db/france_coordinates.json")).shuffle!
