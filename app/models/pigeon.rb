@@ -3,7 +3,7 @@ class Pigeon < ApplicationRecord
   has_many :rentals, dependent: :destroy
   has_many :reviews, through: :rentals
 
-  validates :name, :maximum_payload_weight, :range, :description, :price, presence: true
+  validates :name, :maximum_payload_weight, :photo, :range, :description, :price, presence: true
 
   has_one_attached :photo
   geocoded_by :address
