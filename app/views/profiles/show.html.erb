@@ -19,27 +19,35 @@
 
   <h2>Your pigeons:</h2>
   <hr>
+
     <% if current_user.pigeons.exists? %>
       <% current_user.pigeons.each do |pigeon| %>
-      <ul>
-        <li><h3><%= pigeon.name.capitalize %></h3></li>
-      </ul>
-      <p><strong>Description:</strong> <%= pigeon.description.capitalize %></p>
-      <p><strong>Address:</strong> <%= pigeon.address %></p>
-      <p><strong>Maximum payload:</strong> <%= pigeon.maximum_payload_weight.to_i %> grams max</p>
-      <p><strong>Range:</strong> <%= pigeon.range %> kilometers</p>
-      <p><strong>Price per day:</strong> <%= pigeon.price %>€</p>
-      <%= link_to "Delete your pigeon", pigeon_path(pigeon), class: "btn btn-outline-danger btn-sm", data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
-                    } %>
-      <%= link_to "Edit your pigeon", edit_pigeon_path(pigeon), class: "btn btn-outline-primary btn-sm" %>
-      <hr>
+        <ul>
+          <li><h3><%= pigeon.name.capitalize %></h3></li>
+        </ul>
+        <p><strong>Description:</strong> <%= pigeon.description.capitalize %></p>
+        <p><strong>Address:</strong> <%= pigeon.address %></p>
+        <p><strong>Maximum payload:</strong> <%= pigeon.maximum_payload_weight.to_i %> grams max</p>
+        <p><strong>Range:</strong> <%= pigeon.range %> kilometers</p>
+        <p><strong>Price per day:</strong> <%= pigeon.price %>€</p>
+        <%= link_to "Delete your pigeon", pigeon_path(pigeon), class: "btn btn-outline-danger btn-sm", data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      } %>
+        <%= link_to "Edit your pigeon", edit_pigeon_path(pigeon), class: "btn btn-outline-primary btn-sm" %>
+
+        <hr>
+
+        <h3>What they say about <%= pigeon.name.capitalize %>:</h3>
+
       <% end %>
     <% else %>
       <p>You don't have any pigeons...</p>
     <% end %>
-    <a class="btn btn-primary btn-sm" href="/pigeons/new">Add a pigeon</a>
+
+  <hr>
+
+  <a class="btn btn-primary btn-sm" href="/pigeons/new">Add a pigeon</a>
 
   <hr>
 
@@ -55,8 +63,16 @@
 
   <hr>
 
+  <h3>What you said about other pigeons:</h3>
+  <% current_user.reviews.each do |review| %>
+    <p>About <strong><%= review.rental.pigeon.name %></strong>: "<i><%= review.comment %>"</i></p>
+  <% end %>
+
+
+  <hr>
+
   <p>Unhappy?</p>
 
-  <div><%#= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger btn-sm" %></div>
+  <div><%= button_to "Delete my account", registration_path(current_user), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger btn-sm" %></div>
 
 </div>
