@@ -18,6 +18,13 @@ class RentalsController < ApplicationController
     end
   end
 
+  def accept
+    @rental = Rental.find(params[:id])
+    @rental.status = "accepted"
+    @rental.save
+    redirect_to profile_path
+  end
+
   def show
     @rental = Rental.find(params[:id])
     @review = Review.new
