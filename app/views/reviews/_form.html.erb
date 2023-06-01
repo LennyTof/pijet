@@ -1,6 +1,6 @@
-<h2>Leave your review !</h2>
+<h2>Leave your review!</h2>
 <%= simple_form_for [@rental, @review] do |f| %>
-  <%= f.input :comment %>
+  <%= f.input :comment, label: false %>
   <%= f.label :rating %>
   <%= f.select :rating, options_for_select([1, 2, 3, 4, 5])%>
   <br><br>

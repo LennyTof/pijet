@@ -45,7 +45,7 @@
 
     <div data-controller='price'>
       <label for='pigeon[price]'><strong>Price per day:</strong> <span data-price-target='priceElement'>5</span> €</label>
-      <%= f.input :price, collection: 5..1000, label: false, as: :range, input_html: { min:'5', max:'1000', data: { action: 'input->price#price', price_target: 'input'}}%>
+      <%= f.input :price, collection: 5..100, label: false, as: :range, input_html: { min:'5', max:'100', data: { action: 'input->price#price', price_target: 'input'}}%>
     </div>
 
     <br>
