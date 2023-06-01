@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = [
     "startDate",
     "endDate",
+    "dates",
     "nbOfDays",
     "rental",
     "grooming",
@@ -24,11 +25,10 @@ export default class extends Controller {
   }
 
   update() {
-    const startDate = new Date(this.startDateTarget.value);
-    const endDate = new Date(this.endDateTarget.value);
-    if (!isNaN(startDate) && !isNaN(endDate)) {
+    this.parseDates(this.datesTarget.value);
 
-      const nb_of_days = (endDate - startDate) / 86400000; // divide by number of miliseconds in one day
+    if (!isNaN(this.startDate) && !isNaN(this.endDate)) {
+      const nb_of_days = ((this.endDate - this.startDate) / 86400000) + 1; // divide by number of miliseconds in one day
       const rentalPrice = nb_of_days * this.priceValue;
       const groomingPrice = this.groomingValue;
       const servicePrice = nb_of_days * this.serviceValue;
@@ -41,6 +41,17 @@ export default class extends Controller {
       this.totalTarget.innerText = rentalPrice + groomingPrice + servicePrice + taxPrice;
     } else {
       console.log("Enter valid date.");
+    }
+  }
+
+  parseDates(dates) {
+    const datesArray = dates.split("to").map(str => str.trim());
+    if(datesArray.length === 2) {
+      this.startDate = new Date(datesArray[0]);
+      this.endDate = new Date(datesArray[1]);
+    } else {
+      this.startDate = new Date(datesArray[0]);
+      this.endDate = this.startDate;
     }
   }
 }

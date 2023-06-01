@@ -8,16 +8,18 @@
   <h2><%= pigeon.price %>€ per day</h2>
 
   <%= simple_form_for rental, url: book_path(pigeon), data: { action: "change->book-form#update" } do |f| %>
-    <div class="d-flex">
-      <%= f.input :start_date,
+    <%= f.input :start_date,
         as: :string,
-        wrapper_html: {  class: "flex-grow-1 me-2" },
-        input_html: { data: { controller: "datepicker", book_form_target: "startDate" } } %>
-      <%= f.input :end_date,
-        as: :string,
-        wrapper_html: {  class: "flex-grow-1 ms-2" },
-        input_html: { data: { controller: "datepicker", book_form_target: "endDate" } } %>
-    </div>
+        label: "Dates",
+        wrapper_html: {  class: "" },
+        input_html: {
+          data: {
+            controller: "datepicker",
+            datepicker_booked_dates_value: booked_dates.to_json,
+            book_form_target: "dates"
+          }
+        }
+    %>
     <%= f.association :payload_type %>
     <%= f.submit "Book #{pigeon.name}", class: "mt-3 btn btn-lg btn-primary w-100" %>
   <% end %>
