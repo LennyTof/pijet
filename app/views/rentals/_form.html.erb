@@ -2,9 +2,9 @@
      data-controller="book-form"
      data-book-form-price-value=<%= pigeon.price %>
      data-book-form-grooming-value=<%= pigeon.grooming_fee %>
-     data-book-form-service-value=<%= rental.service_fee_per_day %>
-     data-book-form-tax-value=<%= rental.tax_rate %>
-     data-book-form-payload-value="<%= PayloadType.all.to_json %>"
+     data-book-form-service-value=<%= Rental::SERVICE_FEE_PER_DAY %>
+     data-book-form-tax-value=<%= Rental::TAX_RATE %>
+     data-book-form-payload-value="<%= Rental::PAYLOAD_TYPES.to_json %>"
      data-book-form-max-weight-value=<%= pigeon.maximum_payload_weight %>
      >
   <h2><%= pigeon.price %>€ per day</h2>
@@ -13,7 +13,6 @@
     <%= f.input :start_date,
         as: :string,
         label: "Dates",
-        wrapper_html: {  class: "" },
         input_html: {
           data: {
             controller: "datepicker",
@@ -22,25 +21,22 @@
           }
         }
     %>
-    <%= f.input :payload_weight, input_html: {
-          data: {
-            book_form_target: "weight"
-          },
-            class: "d-none"
-          }
+    <%= f.input :payload_weight,
+        input_html: { data: { book_form_target: "weight" } },
+        wrapper_html: { class: "d-none" }
     %>
 
     <div class="flex-between">
       Payload Types:
-      <% PayloadType.all.each do |pt| %>
+      <% Rental::PAYLOAD_TYPES.each do |pt| %>
         <div class="actions">
           <div class="counter-load">
-            <span><%= pt.name %> <%= pt.weight %>g</span>
+            <span><%= pt[:name] %> <%= pt[:weight] %>g</span>
             <div>
               <span class="btn btn-outline-primary round-bordered" data-action="click->book-form#calculateMinus">-</span>
               <span id="counter" data-book-form-target='quantity'>0</span>
               <span class="btn btn-outline-primary round-bordered" data-action="click->book-form#calculatePlus">+</span>
-              <span id='weigth-pt' class='d-none'><%= pt.weight %></span>
+              <span id='weigth-pt' class='d-none'><%= pt[:weight] %></span>
             </div>
           </div>
         </div>

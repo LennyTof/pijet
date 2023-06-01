@@ -11,9 +11,6 @@ class RentalsController < ApplicationController
     @rental.status = "pending"
     @rental.price = (@rental.end_date - @rental.start_date).to_i * @rental.pigeon.price
 
-    # TODO: update model so that this line is not necessary
-    @rental.payload_type = PayloadType.first
-
     if @rental.save
       redirect_to rental_path(@rental)
     else
