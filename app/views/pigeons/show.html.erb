@@ -18,7 +18,7 @@
     <p> <%= @pigeon.name %> has a capacity of <strong><%= @pigeon.maximum_payload_weight %></strong> grams and a maximum range of <strong><%= @pigeon.range %></strong> kilometers</p>
     <% if @user == @pigeon.user %>
       <%= link_to "Edit", edit_pigeon_path(@pigeon), class: "btn btn-primary" %>
-      <%= link_to "Destroy", pigeon_path(@pigeon), class: "btn btn-outline-danger", data: {
+      <%= link_to "Delete this pigeon", pigeon_path(@pigeon), class: "btn btn-outline-danger", data: {
                       turbo_method: :delete,
                       turbo_confirm: "Are you sure?"
                     } %>
@@ -32,15 +32,17 @@
 
 <% if @pigeon.rentals.length > 0 %>
     <p><% @pigeon.rentals.each do |rental| %></p>
-        Renter:
-        <%= rental.user.first_name  %>
-        <br>
-        Price:
-        <%= rental.price %>€
-        <br>
-        Duration:
-        <%= (rental.end_date - rental.start_date).to_i  %> days
-        <br>
+      <div class="card-product">
+      <% if rental.user.photo.key.present? %>
+        <%= cl_image_tag current_user.photo.key %>
+        <% else %>
+          <%= image_tag asset_path("pigeon.png") %>
+        <% end %>
+      <div class="card-product-infos">
+        <strong>Renter:</strong> <%= rental.user.first_name.capitalize %> <br>
+        <strong>Price:</strong> <%= rental.price %>€ <br>
+        <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days <br>
+      </div>
         <% if rental.reviews.length > 0 %>
           <li class="list-group-item">
             <small>
@@ -54,14 +56,15 @@
                 <% count += 1 %>
               <% end %>
             </small>
+            <br>
               <strong> <%= rental.reviews.last.comment %> </strong>
           </li>
+            </div>
         <% else %>
           <p> <i> No review for this rental </i> </p>
         <% end %>
         <br>
-        <br>
     <% end %>
     <% else %>
-<h3> <i> This pigeon has never been rented yet! </i> </h3>
+  <h3> <i> This pigeon has never been rented yet! </i> </h3>
 <% end %>

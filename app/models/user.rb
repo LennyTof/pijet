@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :pigeons, dependent: :destroy
-  has_many :rentals
-  has_many :reviews
+  has_many :rentals, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_one_attached :photo
 
   validates :first_name, presence: true
