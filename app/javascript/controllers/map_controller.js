@@ -18,6 +18,10 @@ export default class extends Controller {
     }
   }
 
+  disconnect() {
+    this.map.remove();
+  }
+
   drawMap() {
     mapboxgl.accessToken = this.accessTokenValue;
     this.map = new mapboxgl.Map({
@@ -53,18 +57,17 @@ export default class extends Controller {
   }
 
   registerEventListeners(pigeonTarget, markerElement) {
-    let markerPath = markerElement.querySelector("path");
     pigeonTarget.addEventListener("mouseenter", () => {
-      markerPath.setAttribute("fill", "#DC2626");
+      markerElement.querySelector(".price-marker").classList.add("active");
     });
     pigeonTarget.addEventListener("mouseleave", () => {
-      markerPath.setAttribute("fill", "#3FB1CE");
+      markerElement.querySelector(".price-marker").classList.remove("active");
     });
     markerElement.addEventListener("mouseenter", () => {
-      markerPath.setAttribute("fill", "#DC2626");
+      pigeonTarget.classList.add("active");
     });
     markerElement.addEventListener("mouseleave", () => {
-      markerPath.setAttribute("fill", "#3FB1CE");
+      pigeonTarget.classList.remove("active");
     });
   }
 }

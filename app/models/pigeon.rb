@@ -19,4 +19,9 @@ class Pigeon < ApplicationRecord
   def self.search(search)
     where("name ILIKE ?", "%#{search}%")
   end
+
+  def avg_rating
+    avg = reviews.average(:rating)
+    avg.nil? ? "-" : avg.round(2).to_s
+  end
 end

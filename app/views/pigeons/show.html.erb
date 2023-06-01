@@ -8,7 +8,7 @@
       <%= cl_image_tag @pigeon.photo.key, crop: :fill, class: "w-100 rounded-4" %>
     </div>
     <div class="col-6">
-      <%= render "rentals/form", rental: @rental, pigeon: @pigeon %>
+      <%= render "rentals/form", rental: @rental, pigeon: @pigeon, booked_dates: @booked_dates %>
     </div>
   </div>
 

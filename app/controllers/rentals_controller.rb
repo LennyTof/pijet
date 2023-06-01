@@ -30,6 +30,17 @@ class RentalsController < ApplicationController
   end
 
   def rental_params
-    params.require(:rental).permit(:start_date, :end_date, :payload_type_id)
+    data = params.require(:rental).permit(:start_date, :payload_type_id)
+
+    # dirty hack
+    # TODO: refactor js controller so that start_date and end_date are sent
+    dates = data[:start_date].split("to").map(&:strip)
+    data[:start_date] = dates[0]
+    if dates.length == 2
+      data[:end_date] = dates[1]
+    else
+      data[:end_date] = data[:start_date]
+    end
+    data
   end
 end

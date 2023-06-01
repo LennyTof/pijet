@@ -10,8 +10,14 @@
   .mapboxgl-ctrl-geocoder,
   .mapboxgl-ctrl-geocoder--input {
     height: 100%;
+    width: 100%;
+    min-width: auto;
     border-radius: 0px;
     background-color: $light-gray;
+  }
+
+  form input {
+    border-radius: 0px;
   }
 
   form div:nth-child(1) input {
