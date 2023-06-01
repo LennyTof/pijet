@@ -3,7 +3,7 @@ class Pigeon < ApplicationRecord
   has_many :rentals, dependent: :destroy
   has_many :reviews, through: :rentals
 
-  validates :name, :maximum_payload_weight, :photo, :range, :description, :price, presence: true
+  validates :name, :address, :maximum_payload_weight, :range, :description, :photo, :price, presence: true
 
   has_one_attached :photo
   geocoded_by :address
@@ -18,5 +18,10 @@ class Pigeon < ApplicationRecord
 
   def self.search(search)
     where("name ILIKE ?", "%#{search}%")
+  end
+
+  def avg_rating
+    avg = reviews.average(:rating)
+    avg.nil? ? "-" : avg.round(2).to_s
   end
 end
