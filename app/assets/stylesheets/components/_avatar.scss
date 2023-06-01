@@ -22,12 +22,11 @@
 //   border: white 1px solid;
 // }
 
-// TEST FOR FLOATING AVATAR
+// FLOATING AVATAR
 
 .avatar-large {
    margin-top: 70px;
    margin-right: 50px;
-   border: black 2px solid;
   }
 
 @keyframes slideInFromLeft {
@@ -132,7 +131,6 @@
 
 .avatar {
   animation: float 5s ease-in-out infinite;
-/*   background-color: transparent; */
   border-radius: 50%;
   width: 110px;
   height: 110px;
