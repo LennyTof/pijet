@@ -6,5 +6,5 @@ class Rental < ApplicationRecord
 
   validates :user, presence: true
   validates :pigeon, presence: true
-  validates :payload_type, presence: true
+  validates :payload_weight, presence: true
 end

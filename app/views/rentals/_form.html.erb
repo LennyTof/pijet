@@ -22,6 +22,14 @@
           }
         }
     %>
+    <%= f.input :payload_weight, input_html: {
+          data: {
+            book_form_target: "weight"
+          },
+            class: "d-none"
+          }
+    %>
+
     <div class="flex-between">
       Payload Types:
       <% PayloadType.all.each do |pt| %>

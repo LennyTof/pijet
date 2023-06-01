@@ -13,7 +13,8 @@ export default class extends Controller {
     "tax",
     "total",
     "quantity",
-    "sum"
+    "sum",
+    "weight"
   ]
 
   static values = {
@@ -60,6 +61,7 @@ export default class extends Controller {
       quantity.innerText = number - 1
       this.sumTarget.innerText = total - weightInt
     }
+    this.weightTarget.value = this.sumTarget.innerText;
   }
 
   calculatePlus(event) {
@@ -80,8 +82,9 @@ export default class extends Controller {
         quantity.innerText = num + 1
       }
     }
+    this.weightTarget.value = this.sumTarget.innerText;
   }
-  
+
   parseDates(dates) {
     const datesArray = dates.split("to").map(str => str.trim());
     if(datesArray.length === 2) {

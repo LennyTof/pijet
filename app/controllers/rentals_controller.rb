@@ -11,6 +11,9 @@ class RentalsController < ApplicationController
     @rental.status = "pending"
     @rental.price = (@rental.end_date - @rental.start_date).to_i * @rental.pigeon.price
 
+    # TODO: update model so that this line is not necessary
+    @rental.payload_type = PayloadType.first
+
     if @rental.save
       redirect_to rental_path(@rental)
     else
@@ -37,7 +40,7 @@ class RentalsController < ApplicationController
   end
 
   def rental_params
-    data = params.require(:rental).permit(:start_date, :payload_type_id)
+    data = params.require(:rental).permit(:start_date, :payload_weight)
 
     # dirty hack
     # TODO: refactor js controller so that start_date and end_date are sent
