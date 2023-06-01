@@ -8,7 +8,7 @@
   <% end %>
 <% end %>
 <hr>
-<h3>Reviews you left:</h3>
+<h3>Reviews you gave:</h3>
 <hr>
 <% current_user.reviews.each do |review| %>
   <p>For <strong><%= review.rental.pigeon.name.capitalize %></strong>: "<i><%= review.comment %>"</i></p>
