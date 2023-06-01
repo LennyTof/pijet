@@ -47,7 +47,7 @@ User.create!(
       longitude: coords[0],
       price: (rand * 9).ceil * 10,
       grooming_fee: 100,
-      user: user
+      user: user,
     )
     file = File.open(pigeon_picture_paths[counter % pigeon_picture_paths.length])
     pigeon.photo.attach(io: file, filename: "#{pigeon.id}.", content_type: "image/jpeg")

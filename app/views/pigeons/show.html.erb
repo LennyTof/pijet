@@ -1,7 +1,6 @@
 <div class="container pt-3">
   <h1 class="text-center"><%= @pigeon.name %>,</h1>
   <h4 class="text-center">a pigeon provided by <%= @pigeon.user.first_name %></h4>
-
   <br>
   <div class="row">
     <div class="col-6">
@@ -11,38 +10,35 @@
       <%= render "rentals/form", rental: @rental, pigeon: @pigeon, booked_dates: @booked_dates %>
     </div>
   </div>
-
-<div class="card mt-5">
-  <div class="card-body text-center">
-    <p><%= @pigeon.description %></p>
-    <p> <%= @pigeon.name %> has a capacity of <strong><%= @pigeon.maximum_payload_weight %></strong> grams and a maximum range of <strong><%= @pigeon.range %></strong> kilometers</p>
-    <% if @user == @pigeon.user %>
-      <%= link_to "Edit", edit_pigeon_path(@pigeon), class: "btn btn-primary" %>
-      <%= link_to "Delete this pigeon", pigeon_path(@pigeon), class: "btn btn-outline-danger", data: {
+  <div class="card mt-5">
+    <div class="card-body text-center">
+      <p><%= @pigeon.description %></p>
+      <p> <%= @pigeon.name %> has a capacity of <strong><%= @pigeon.maximum_payload_weight %></strong> grams and a maximum range of <strong><%= @pigeon.range %></strong> kilometers</p>
+      <% if @user == @pigeon.user %>
+        <%= link_to "Edit", edit_pigeon_path(@pigeon), class: "btn btn-primary" %>
+        <%= link_to "Delete this pigeon", pigeon_path(@pigeon), class: "btn btn-outline-danger", data: {
                       turbo_method: :delete,
                       turbo_confirm: "Are you sure?"
                     } %>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
-
-<br>
-<h1> Rental history </h1>
-<br>
-
-<% if @pigeon.rentals.length > 0 %>
+  <br>
+  <h1> Rental history </h1>
+  <br>
+  <% if @pigeon.rentals.length > 0 %>
     <p><% @pigeon.rentals.each do |rental| %></p>
       <div class="card-product">
-      <% if rental.user.photo.key.present? %>
-        <%= cl_image_tag current_user.photo.key %>
+        <% if rental.user.photo.key.present? %>
+          <%= cl_image_tag rental.user.photo.key %>
         <% else %>
           <%= image_tag asset_path("pigeon.png") %>
         <% end %>
-      <div class="card-product-infos">
-        <strong>Renter:</strong> <%= rental.user.first_name.capitalize %> <br>
-        <strong>Price:</strong> <%= rental.price %>€ <br>
-        <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days <br>
-      </div>
+        <div class="card-product-infos">
+          <strong>Renter:</strong> <%= rental.user.first_name.capitalize %> <br>
+          <strong>Price:</strong> <%= rental.price %>€ <br>
+          <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days <br>
+        </div>
         <% if rental.reviews.length > 0 %>
           <li class="list-group-item">
             <small>
@@ -57,14 +53,14 @@
               <% end %>
             </small>
             <br>
-              <strong> <%= rental.reviews.last.comment %> </strong>
+            <strong> <%= rental.reviews.last.comment %> </strong>
           </li>
-            </div>
-        <% else %>
-          <p> <i> No review for this rental </i> </p>
-        <% end %>
-        <br>
+        </div>
+      <% else %>
+        <p> <i> No review for this rental </i> </p>
+      <% end %>
+      <br>
     <% end %>
-    <% else %>
-  <h3> <i> This pigeon has never been rented yet! </i> </h3>
-<% end %>
+  <% else %>
+    <h3> <i> This pigeon has never been rented yet! </i> </h3>
+  <% end %>

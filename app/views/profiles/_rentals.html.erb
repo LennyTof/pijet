@@ -1,0 +1,46 @@
+<% if current_user.pigeons.exists? %>
+  <% current_user.pigeons.each do |pigeon| %>
+    <% pigeon.rentals.each do |rental| %></p>
+    <%  if rental.end_date > Date.today %>
+      <div class="card-product">
+        <% if rental.user.photo.key.present? %>
+          <%= cl_image_tag current_user.photo.key %>
+        <% else %>
+          <%= image_tag asset_path("pigeon.png") %>
+        <% end %>
+        <div class="card-product-infos">
+          <strong>Renter:</strong> <%= rental.user.first_name.capitalize %>
+          <strong>Pigeon:</strong> <%= rental.pigeon.name %> <br>
+          <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days <br>
+          <strong>Status:</strong>  <%= rental.status.capitalize %><br>
+          <%= link_to "Accept booking", "/rentals/#{rental.id}/accept", data: { 'turbo-method' => :post }, class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<% end %>
+<br>
+<hr>
+<h2>Rentals history:</h2>
+<hr>
+<% if current_user.pigeons.exists? %>
+  <% current_user.pigeons.each do |pigeon| %>
+    <% pigeon.rentals.each do |rental| %></p>
+    <%  if rental.end_date < Date.today %>
+      <div class="card-product">
+        <% if rental.user.photo.key.present? %>
+          <%= cl_image_tag current_user.photo.key %>
+        <% else %>
+          <%= image_tag asset_path("pigeon.png") %>
+        <% end %>
+        <div class="card-product-infos">
+          <strong>Renter:</strong> <%= rental.user.first_name.capitalize %>
+          <strong>Pigeon:</strong> <%= rental.pigeon.name %> <br>
+          <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days <br>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+<% end %>
