@@ -1,51 +1,62 @@
 <div class='container'>
+
   <h2>Tell us more about your pigeon</h2>
+
   <%= simple_form_for(@pigeon) do |f| %>
-  <%= f.input :name, :label_html => { :class => 'simple-form-label' } %>
-  <br>
-  <%= f.input :maximum_payload_weight, as: :radio_buttons, collection:[
-            ['10g (ex: 1 USB key)', 10],
-            ['20g (ex: 1 SIM CARD)', 20],
-            ['30g (ex: 3 USB keys)', 30],
-            ['40g (ex: 22 parchment papers)', 40],
-            ['50g (ex: 1 SSD Hard drive)', 50],
-            ['60g (ex: 1 SSD Hard drive & 1 USB key)', 60]],
-            label: 'Maximum payload weight (in grams)',
-            collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'category-wrapper',
-            item_wrapper_class: 'category-item',
-            input_html: {class: 'category-selector'},
-            collection: Pigeon::WEIGHT %>
 
-  <br>
+    <%= f.input :name, :label_html => { :class => 'simple-form-label' } %>
 
-  <div data-controller='range'>
-    <label for='pigeon[range]'><strong>Maximum range in km</strong> (<span data-range-target='rangeElement'>10</span> km)</label>
-    <%= f.input :range, collection: 10..1000, label: false, as: :range, input_html: { min:'10', max:'1000', data: { action: 'input->range#range', range_target: 'input'}}%>
-  </div>
+    <br>
 
-  <br>
+    <%= f.input :maximum_payload_weight, as: :radio_buttons, collection:[
+              ['10g (ex: 1 USB key)', 10],
+              ['20g (ex: 1 SIM CARD)', 20],
+              ['30g (ex: 3 USB keys)', 30],
+              ['40g (ex: 22 parchment papers)', 40],
+              ['50g (ex: 1 SSD Hard drive)', 50],
+              ['60g (ex: 1 SSD Hard drive & 1 USB key)', 60]],
+              label: 'Maximum payload weight (in grams)',
+              collection_wrapper_tag: 'div',
+              collection_wrapper_class: 'category-wrapper',
+              item_wrapper_class: 'category-item',
+              input_html: {class: 'category-selector'},
+              collection: Pigeon::WEIGHT %>
 
-  <%= f.input :description, :label_html => { :class => 'simple-form-label' } %>
-  <%= f.input :address,
-              :label_html => { :class => 'simple-form-label' },
-              input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
-              wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_ACCESS_TOKEN"]}}
-              %>
-  <br>
+    <br>
 
-  <div data-controller='price'>
-    <label for='pigeon[price]'><strong>Price per day:</strong> <span data-price-target='priceElement'>5</span> €</label>
-    <%= f.input :price, collection: 5..1000, label: false, as: :range, input_html: { min:'5', max:'1000', data: { action: 'input->price#price', price_target: 'input'}}%>
-  </div>
+    <div data-controller='range'>
+      <label for='pigeon[range]'><strong>Maximum range in km</strong> (<span data-range-target='rangeElement'>10</span> km)</label>
+      <%= f.input :range, collection: 10..1000, label: false, as: :range, input_html: { min:'10', max:'1000', data: { action: 'input->range#range', range_target: 'input'}}%>
+    </div>
 
-  <br>
+    <br>
 
-  <%= f.input :photo, as: :file,
-              :label_html => { :class => 'simple-form-label' } %>
+    <%= f.input :description, :label_html => { :class => 'simple-form-label' } %>
 
-  <br>
+    <br>
 
-  <%= f.button :submit, "Add your pigeon", class: "btn btn-primary btn-lg" %>
+    <%= f.input :address,
+                :label_html => { :class => 'simple-form-label' },
+                input_html: {data: {address_autocomplete_target: "address"}, class: "d-none"},
+                wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_ACCESS_TOKEN"]}}
+                %>
+
+    <br>
+
+    <div data-controller='price'>
+      <label for='pigeon[price]'><strong>Price per day:</strong> <span data-price-target='priceElement'>5</span> €</label>
+      <%= f.input :price, collection: 5..1000, label: false, as: :range, input_html: { min:'5', max:'1000', data: { action: 'input->price#price', price_target: 'input'}}%>
+    </div>
+
+    <br>
+
+    <%= f.input :photo, as: :file,
+                :label_html => { :class => 'simple-form-label' } %>
+
+    <br>
+
+    <%= f.button :submit, "Add your pigeon", class: "btn btn-primary btn-lg" %>
+
   <% end %>
+
 </div>

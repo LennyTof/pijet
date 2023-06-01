@@ -33,32 +33,32 @@
 
   <div class="text-center">
   <% if @rental.reviews.length > 0 %>
-      <h1>You've already left a comment for this rental !</h1>
-      <li class="list-group-item">
-        <small>
-          <% count = 0 %>
-          <% 5.times do %>
-            <% if @rental.reviews.last.rating > count %>
-              <i class="fa-solid fa-star"></i>
-            <% else %>
-              <i class="fa-regular fa-star"></i>
-            <% end %>
-            <% count += 1 %>
+    <h2>Thank you for your comment</h2>
+    <li class="list-group-item">
+      <small>
+        <% count = 0 %>
+        <% 5.times do %>
+          <% if @rental.reviews.last.rating > count %>
+            <i class="fa-solid fa-star"></i>
+          <% else %>
+            <i class="fa-regular fa-star"></i>
           <% end %>
-        </small>
+          <% count += 1 %>
+        <% end %>
+      </small>
 
-        <br>
+      <br>
 
-        <strong> <%= @rental.reviews.last.comment.capitalize %> </strong>
-      </li>
-    <% else %>
+      <strong> <%= @rental.reviews.last.comment.capitalize %> </strong>
+    </li>
+  <% else %>
       <%= render "reviews/form", rental: @rental, review: @review %>
-    <% end %>
+  <% end %>
 
     <br>
     <br>
 
-  <%= link_to "Book this pigeon again!", "/pigeons/#{@rental.pigeon.id}", class: "btn btn-primary" %>
+  <%= link_to "Book this pigeon again", "/pigeons/#{@rental.pigeon.id}", class: "btn btn-primary" %>
 
   </div>
 </div>
