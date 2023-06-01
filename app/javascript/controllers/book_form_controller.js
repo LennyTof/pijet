@@ -10,14 +10,18 @@ export default class extends Controller {
     "grooming",
     "service",
     "tax",
-    "total"
+    "total",
+    "quantity",
+    "sum"
   ]
 
   static values = {
     price: Number,
     grooming: Number,
     service: Number,
-    tax: Number
+    tax: Number,
+    payload: Array,
+    maxWeight: Number
   }
 
   connect() {
@@ -41,6 +45,40 @@ export default class extends Controller {
       this.totalTarget.innerText = rentalPrice + groomingPrice + servicePrice + taxPrice;
     } else {
       console.log("Enter valid date.");
+    }
+  }
+
+  calculateMinus(event) {
+    const quantity = event.currentTarget.nextElementSibling
+    const number = Number.parseInt(quantity.innerText, 10)
+    let total = Number.parseInt(this.sumTarget.innerText, 10)
+    const weight = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling
+    const weightInt = Number.parseInt(weight.innerText, 10)
+    if (quantity.innerText === "0") {
+      quantity.innerText = '0'
+    } else {
+      quantity.innerText = number - 1
+      this.sumTarget.innerText = total - weightInt
+    }
+  }
+
+  calculatePlus(event) {
+    const quantity = event.currentTarget.previousElementSibling
+    let num = Number.parseInt(quantity.innerText, 10)
+    const weight = event.currentTarget.nextElementSibling
+    const weightInt = Number.parseInt(weight.innerText, 10)
+    if (this.sumTarget.innerText >= this.maxWeightValue) {
+      window.alert("Your item's weight cannot exceed this pigeon's capacity")
+    } else if ( weightInt > this.maxWeightValue) {
+      window.alert("Your item's weight cannot exceed this pigeon's capacity")
+    } else {
+      this.sumTarget.innerText = Number.parseInt(this.sumTarget.innerText, 10) + weightInt
+      if (this.sumTarget.innerText > this.maxWeightValue) {
+        window.alert("Your item's weight cannot exceed this pigeon's capacity")
+        this.sumTarget.innerText = Number.parseInt(this.sumTarget.innerText, 10) - weightInt
+      } else {
+        quantity.innerText = num + 1
+      }
     }
   }
 }

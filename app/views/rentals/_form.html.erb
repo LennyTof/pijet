@@ -4,6 +4,8 @@
      data-book-form-grooming-value=<%= pigeon.grooming_fee %>
      data-book-form-service-value=<%= rental.service_fee_per_day %>
      data-book-form-tax-value=<%= rental.tax_rate %>
+     data-book-form-payload-value="<%= PayloadType.all.to_json %>"
+     data-book-form-max-weight-value=<%= pigeon.maximum_payload_weight %>
      >
   <h2><%= pigeon.price %>€ per day</h2>
 
@@ -18,7 +20,24 @@
         wrapper_html: {  class: "flex-grow-1 ms-2" },
         input_html: { data: { controller: "datepicker", book_form_target: "endDate" } } %>
     </div>
-    <%= f.association :payload_type %>
+    <%#= f.association :payload_type, as: :check_boxes %>
+    <div class="flex-between">
+      Payload Types:
+      <% PayloadType.all.each do |pt| %>
+        <div class="actions">
+          <div class="counter-load">
+            <span><%= pt.name %> <%= pt.weight %>g</span>
+            <div>
+              <span class="btn btn-outline-primary round-bordered" data-action="click->book-form#calculateMinus">-</span>
+              <span id="counter" data-book-form-target='quantity'>0</span>
+              <span class="btn btn-outline-primary round-bordered" data-action="click->book-form#calculatePlus">+</span>
+              <span id='weigth-pt' class='d-none'><%= pt.weight %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+        <p><span data-book-form-target='sum'>0</span><span>g</span></p>
+    </div>
     <%= f.submit "Book #{pigeon.name}", class: "mt-3 btn btn-lg btn-primary w-100" %>
   <% end %>
 

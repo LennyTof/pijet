@@ -8,7 +8,7 @@
             ['30g (ex: 3 USB keys)', 30],
             ['40g (ex: 22 parchment papers)', 40],
             ['50g (ex: 1 SSD Hard drive)', 50],
-            ['60g (ex: 1 SSD Hard drive & 1 USB key)', 60]],
+            ['60g (ex: 1 SSD Hard drive & 1 USB key)', 60],],
             label: 'Maximum payload weight (in grams)',
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'category-wrapper',
@@ -16,7 +16,7 @@
             input_html: {class: 'category-selector'},
             collection: Pigeon::WEIGHT %>
 <div data-controller='range'>
-  <label for='pigeon[range]'>Maximum range in km (<span data-range-target='rangeElement'>10</span> km)</label>
+  <label for='pigeon[range]'>Maximum range (<span data-range-target='rangeElement'>10</span> km)</label>
   <%= f.input :range, collection: 10..1000,  label: false, as: :range, input_html: { min:'10', max:'1000', data: { action: 'input->range#range', range_target: 'input'}}%>
 </div>
 <%= f.input :description %>
