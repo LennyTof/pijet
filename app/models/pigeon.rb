@@ -8,6 +8,7 @@ class Pigeon < ApplicationRecord
   has_one_attached :photo
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?, unless: :geocoded?
+  before_save :set_grooming
 
   WEIGHT = ["10g (ex: 1 USB key)",
             "20g (ex: 1 SIM CARD)",
@@ -23,5 +24,11 @@ class Pigeon < ApplicationRecord
   def avg_rating
     avg = reviews.average(:rating)
     avg.nil? ? "-" : avg.round(2).to_s
+  end
+
+  private
+
+  def set_grooming
+    self.grooming_fee = (5..100).to_a.sample
   end
 end
