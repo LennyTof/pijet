@@ -3,22 +3,20 @@ class PigeonsController < ApplicationController
   before_action :find_pigeon, only: %i[show edit update destroy]
 
   def index
+    @pigeons = policy_scope(Pigeon)
     @mapbox_access_token = ENV.fetch("MAPBOX_ACCESS_TOKEN", nil)
     @pigeons = Pigeon.all.geocoded
 
-    if params[:name].present?
-      @pigeons = @pigeons.where("name ILIKE ?", "%#{params[:name]}%").order("created_at DESC")
-    end
+    @pigeons = @pigeons.where("name ILIKE ?", "%#{params[:name]}%").order("created_at DESC") if params[:name].present?
 
-    if params[:address].present?
-      @pigeons = @pigeons.near(params[:address], 100)
-    end
+    @pigeons = @pigeons.near(params[:address], 100) if params[:address].present?
 
     if params[:start_date].present? && params[:end_date].present?
       sql_query = "(rentals.start_date BETWEEN :start_date AND :end_date) OR
         (rentals.end_date BETWEEN :start_date AND :end_date)"
 
-      booked_pigeons = Pigeon.joins(:rentals).where(sql_query, start_date: params[:start_date], end_date: params[:end_date]).uniq
+      booked_pigeons = Pigeon.joins(:rentals).where(sql_query, start_date: params[:start_date],
+                                                               end_date: params[:end_date]).uniq
       @pigeons = @pigeons.excluding(booked_pigeons)
     end
 
@@ -26,6 +24,7 @@ class PigeonsController < ApplicationController
   end
 
   def show
+    authorize @pigeon
     @user = current_user
     @rental = Rental.new
     @booked_dates = @pigeon.rentals.map { |rental| { from: rental.start_date, to: rental.end_date } }.uniq
@@ -34,10 +33,12 @@ class PigeonsController < ApplicationController
   end
 
   def new
+    authorize @pigeon
     @pigeon = Pigeon.new
   end
 
   def create
+    authorize @pigeon
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.user = current_user
     if @pigeon.save
@@ -48,9 +49,13 @@ class PigeonsController < ApplicationController
   end
 
   def edit
+    authorize @pigeon
+
   end
 
   def update
+    authorize @pigeon
+
     if @pigeon.update(pigeon_params)
       redirect_to @pigeon
     else
@@ -59,6 +64,8 @@ class PigeonsController < ApplicationController
   end
 
   def destroy
+    authorize @pigeon
+
     @pigeon.destroy
     redirect_to profile_path(current_user), status: :see_other
   end
