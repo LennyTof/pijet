@@ -74,7 +74,6 @@
   }
 }
 
-
 .card-category {
   background-size: cover;
   background-position: inherit;
@@ -88,4 +87,59 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+// Video banner
+
+.video-banner {
+  position:relative;
+}
+
+.video-banner video {
+    position:relative;
+    z-index:0;
+}
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  text-align: center;
+  transform: translate(-50%,-50%);
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.outter{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.video-container {
+  height: 400px;
+  width:100%;
+  max-width:1000px;
+
+  position: relative;
+  overflow: hidden;
+
+}
+
+video {
+  object-fit: cover; // Set the magic
+  position: absolute;
+  height: 500px;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+#text-color-banner {
+  color: white;
 }
