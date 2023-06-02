@@ -16,6 +16,7 @@ class RentalsController < ApplicationController
     else
       render "pigeons/show", status: :unprocessable_entity
     end
+    authorize @rental
   end
 
   def accept
@@ -23,11 +24,29 @@ class RentalsController < ApplicationController
     @rental.status = "accepted"
     @rental.save
     redirect_to profile_path
+    authorize @rental
   end
 
   def show
     @rental = Rental.find(params[:id])
     @review = Review.new
+    authorize @rental
+  end
+
+  def new
+    authorize @rental
+  end
+
+  def edit
+    authorize @rental
+  end
+
+  def update
+    authorize @rental
+  end
+
+  def destroy
+    authorize @rental
   end
 
   private

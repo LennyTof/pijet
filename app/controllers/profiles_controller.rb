@@ -1,9 +1,9 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  # before_action :find_pigeon, only: %i[show edit update destroy]
 
   def show
     @user = User.find(params[:id])
+    authorize @user, policy_class: ProfilePolicy
   end
 
   private
@@ -12,9 +12,3 @@ class ProfilesController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :photo)
   end
 end
-
-private
-
-# def find_pigeon
-#   @pigeon = Pigeon.find(params[:id])
-# end

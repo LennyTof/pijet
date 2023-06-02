@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
     else
       render "rentals/show", status: :unprocessable_entity
     end
+    authorize @review
   end
 
   private
