@@ -8,7 +8,7 @@
                   action: "submit->search-form#send",
                   turbo: "false"
                 } do |f| %>
-    <div class="flex-grow-1 datepicker-container">
+    <div class="datepicker-container">
       <%= f.text_field :dates,
         class: "form-control text-center",
         placeholder: "When?",
@@ -18,7 +18,7 @@
         }
        %>
     </div>
-    <div class="flex-grow-1 address-container"
+    <div class="address-container"
          data-controller="address-autocomplete"
          data-address-autocomplete-default-value="<%= params[:address] %>"
          data-address-autocomplete-api-key-value="<%= ENV["MAPBOX_ACCESS_TOKEN"] %>">
