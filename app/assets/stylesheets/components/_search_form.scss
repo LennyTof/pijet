@@ -1,11 +1,19 @@
+.calendar-icon {
+  position: absolute;
+  width: 14px;
+  top: 11px;
+  left: 12px;
+  fill: #757575;
+}
+
 .search-form {
   padding: 1em;
   background-color: white;
   border-radius: $border-radius-lg;
 
   form {
-    border-radius: 10px;
-    border: 2px solid #670AFF;
+    border-radius: $border-radius-lg;
+    border: 1px solid #670AFF;
   }
 
   .datepicker-container {
@@ -35,14 +43,6 @@
 
   .mapboxgl-ctrl-geocoder--button {
     background-color: transparent;
-  }
-
-  .calendar-icon {
-    position: absolute;
-    width: 14px;
-    top: 11px;
-    left: 12px;
-    fill: #757575;
   }
 
   form input {
