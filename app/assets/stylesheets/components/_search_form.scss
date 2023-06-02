@@ -8,12 +8,10 @@
 
 .search-form {
   padding: 1em;
-  background-color: white;
   border-radius: $border-radius-lg;
 
   form {
-    border-radius: $border-radius-lg;
-    border: 1px solid #670AFF;
+    justify-content: center;
   }
 
   .datepicker-container {
@@ -58,6 +56,16 @@
   }
 }
 
+.datepicker-container {
+  border: 1px solid $primary;
+  border-radius: $border-radius-lg 0px 0px $border-radius-lg;
+}
+
+.address-container {
+  border: 1px solid $primary;
+  border-left: none;
+}
+
 @media screen and (min-width: 640px) {
   .search-form .mapboxgl-ctrl-geocoder--icon {
       top: 10px;
@@ -67,6 +75,6 @@
   }
   .datepicker-container,
   .address-container {
-    min-width: 300px;
+    width: 300px;
   }
 }
