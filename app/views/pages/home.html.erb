@@ -1,53 +1,73 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://focus.nouvelobs.com/2020/03/22/1668/1553/2387/1193/1008/0/50/0/f0f448f_AFP_1Q34SZ.jpg/webp);">
-  <div class="container">
-    <h1> Pijet brings <strong>data</strong> to <strong>people with a shitty internet connection</strong>!</h1>
-    <p>Rent our pigeons and send your data at the speed of light</p>
-    <a class="btn btn-flat" href="/pigeons/">Rent a pigeon</a>
-    <a class="btn btn-flat" href="/pigeons/new">Earn money with <strong>your </strong>pigeon</a>
-  </div>
+  <%# video banner %>
+
+<div class="video-banner">
+
+<video autoplay loop muted width="100%" height="auto" src="videos/pigeon_video.mp4"></video>
+
+      <div class="overlay">
+        <h1 id="text-color-banner" class="text-center"> Pijet brings <strong>data</strong> to <strong>people with a shitty internet connection</strong>!</h1>
+        <p id="text-color-banner">Rent our pigeons and send your data at the speed of light</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-flat" href="/pigeons/">Rent a pigeon</a>
+        <a class="btn btn-flat" href="/pigeons/new">Earn money with <strong>your </strong>pigeon</a>
+      </div>
 </div>
 
+<div class="container">
+  <h2 class="text-center"> Browse our best pigeons </h2>
 
-<br>
-<br>
-<br>
-<h2 class="text-center"> Browse our best pigeons </h2>
-<br>
-<br>
+  <%# search bar %>
 
+  <div class="container text-center mt-4">
+    <center><%= render "pigeons/search_form" %></center>
+  </div>
 
-<%# search bar %>
-<div class="container text-center mt-4">
-  <%= form_tag(@pigeon_path, method: "get", id: "search-form", class: "form-inline") do %>
-    <div class="input-group">
-      <%= text_field_tag :search, params[:search], placeholder: "Search pigeon", class: "form-control" %>
-      <div class="input-group-append">
-        <%= submit_tag "Search", name: nil, class: "btn btn-flat" %>
-      </div>
-    </div>
-  <% end %>
-
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
 
 <%# 6 random pigeon cards %>
 
-<div class="cards">
-  <% @pigeons.sample(6).each do |pigeon| %>
-    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path(pigeon.photo.key, crop: :fill) %>); background-position: center; background-size: cover;">
-      <div class="card-body d-flex flex-column align-items-center justify-content-center">
-        <h2 class="card-title text-center"><%= pigeon.name.capitalize %> - <%= pigeon.price %> €</h2>
-        <p> <br></p>
-        <%= link_to "Book me", pigeon_path(pigeon), type:"button", class:"btn btn-flat" %>
-      </div>
-    </div>
-  <% end %>
+<% @pigeons.sample(6).each do |pigeon| %>
+    <ul id="pigeons" class="list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <% @pigeons.each do |pigeon| %>
+              <li class="col">
+                <%= link_to pigeon_path(pigeon), class: "text-decoration-none text-black" do %>
+                  <div class="card h-100"
+                      data-map-target="pigeon"
+                      data-latitude=<%= pigeon.latitude %>
+                      data-longitude=<%= pigeon.longitude %>>
+                    <div class="card-img-container">
+                      <%= cl_image_tag pigeon.photo.key, crop: :fill, class: "card-img-top" %>
+                    </div>
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <h5 class="card-title fw-bold"><%= pigeon.name %></h5>
+                        <span><i class="fa-solid fa-star text-info"></i> <%= pigeon.avg_rating %> (<%= pigeon.reviews.count %>)</span>
+                      </div>
+                      <p class="card-description">
+                        <%= pigeon.description %>
+                      </p>
+                    </div>
+                    <div class="card-footer">
+                      <p class="card-text">
+                        <strong><%= pigeon.price %>€</strong> per day
+                      </p>
+                    </div>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+<% end %>
+
+  <br>
+  <br>
+  <br>
+
+  <center><a class="btn btn-flat" href="/pigeons/">Browse through all pigeons</a></center>
 </div>
-<br>
-<br>
-<br>
-
-<%# link to index of all pigeons %>
-
-<a class="btn btn-flat" href="/pigeons/">Browse through all pigeons</a>

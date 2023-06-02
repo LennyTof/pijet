@@ -1,4 +1,5 @@
 $navbar-height: 100px;
+$btn-color: #670AFF;
 
 .navbar-lewagon {
   justify-content: space-between;
@@ -30,8 +31,10 @@ $navbar-height: 100px;
 }
 
 .btn-sign-up {
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   margin-right: 2em;
   border-radius: 5px;
 }
