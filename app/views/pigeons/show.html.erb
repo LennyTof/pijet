@@ -14,10 +14,10 @@
     <div class="card-body text-center">
       <p><%= @pigeon.description %></p>
       <p> <%= @pigeon.name %> has a capacity of <strong><%= @pigeon.maximum_payload_weight %></strong> grams and a maximum range of <strong><%= @pigeon.range %></strong> kilometers</p>
-      <% if @user == @pigeon.user %>
+      <% if policy(@pigeon).edit? %>
         <%= link_to "Edit", edit_pigeon_path(@pigeon), class: "btn btn-primary" %>
         <%= link_to "Delete this pigeon", pigeon_path(@pigeon), class: "btn btn-outline-danger", data: {
-                      turbo_method: :delete,
+          turbo_method: :delete,
                       turbo_confirm: "Are you sure?"
                     } %>
       <% end %>

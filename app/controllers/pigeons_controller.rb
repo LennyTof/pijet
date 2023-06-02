@@ -19,26 +19,22 @@ class PigeonsController < ApplicationController
                                                                end_date: params[:end_date]).uniq
       @pigeons = @pigeons.excluding(booked_pigeons)
     end
-
     @markers = @pigeons.map { |pigeon| render_to_string(partial: "marker", locals: { pigeon: }) }
   end
 
   def show
-    authorize @pigeon
     @user = current_user
     @rental = Rental.new
     @booked_dates = @pigeon.rentals.map { |rental| { from: rental.start_date, to: rental.end_date } }.uniq
-    # @review = Review.find(params[:pigeon_id])
-    # @pigeon.reviews = @review
+    authorize @pigeon
   end
 
   def new
-    authorize @pigeon
     @pigeon = Pigeon.new
+    authorize @pigeon
   end
 
   def create
-    authorize @pigeon
     @pigeon = Pigeon.new(pigeon_params)
     @pigeon.user = current_user
     if @pigeon.save
@@ -46,11 +42,11 @@ class PigeonsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+    authorize @pigeon
   end
 
   def edit
     authorize @pigeon
-
   end
 
   def update
