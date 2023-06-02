@@ -11,4 +11,15 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  after_validation :set_photo
+
+  private
+
+  def set_photo
+    unless photo.attached?
+      file = File.open("#{Rails.root}/app/assets/images/pigeon.png")
+      photo.attach(io: file, filename: "#{id}.png", content_type: "image/png")
+    end
+  end
 end
