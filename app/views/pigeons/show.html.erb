@@ -1,7 +1,6 @@
 <div class="container pt-3">
-  <h1 class="text-center"><%= @pigeon.name %>,</h1>
-  <h4 class="text-center">a pigeon provided by <%= @pigeon.user.first_name %></h4>
-  <br>
+  <h1 class="text-center my-3"><%= @pigeon.name %>,</h1>
+  <h4 class="text-center mb-5">a pigeon provided by <%= @pigeon.user.first_name %></h4>
   <div class="row">
     <div class="col-6">
       <%= cl_image_tag @pigeon.photo.key, crop: :fill, class: "w-100 rounded-4" %>
@@ -27,39 +26,40 @@
   <h1> Rental history </h1>
   <br>
   <% if @pigeon.rentals.length > 0 %>
-    <p><% @pigeon.rentals.each do |rental| %></p>
-      <div class="card-product">
-        <% if rental.user.photo.key.present? %>
-          <%= cl_image_tag rental.user.photo.key %>
-        <% else %>
-          <%= image_tag asset_path("pigeon.png") %>
-        <% end %>
+    <% @pigeon.rentals.each do |rental| %>
+      <div class="card-review card-product">
+        <%= cl_image_tag rental.user.photo.key %>
         <div class="card-product-infos">
-          <strong>Renter:</strong> <%= rental.user.first_name.capitalize %> <br>
-          <strong>Price:</strong> <%= rental.price %>€ <br>
-          <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days <br>
-        </div>
-        <% if rental.reviews.length > 0 %>
-          <li class="list-group-item">
+          <div class="d-flex mb-3">
+            <span class="rental-info badge rounded-pill text-bg-primary me-3">
+              <strong>Renter:</strong> <%= rental.user.first_name.capitalize %>
+            </span>
+            <span class="rental-info badge rounded-pill text-bg-primary me-3">
+              <strong>Price:</strong> <%= rental.price %>€
+            </span>
+            <span class="rental-info badge rounded-pill text-bg-primary me-3">
+              <strong>Duration:</strong> <%= (rental.end_date - rental.start_date).to_i %> days
+            </span>
+          </div>
+          <% if rental.reviews.length > 0 %>
+          <div>
             <small>
-              <% count = 0 %>
-              <% 5.times do %>
-                <% if rental.reviews.last.rating > count %>
-                  <i class="fa-solid fa-star"></i>
-                <% else %>
-                  <i class="fa-regular fa-star"></i>
-                <% end %>
-                <% count += 1 %>
+              <% rental.reviews.last.rating.times do %>
+                 <i class="fa-solid fa-star text-info"></i>
+              <% end %>
+              <% (5 - rental.reviews.last.rating).times do %>
+                 <i class="fa-regular fa-star text-info"></i>
               <% end %>
             </small>
-            <br>
-            <strong> <%= rental.reviews.last.comment %> </strong>
-          </li>
+            <p class="comment">
+              <%= rental.reviews.last.comment.truncate(300) %>
+            </p>
+          </div>
+          <% else %>
+          <p><i> No review for this rental </i></p>
+          <% end %>
         </div>
-      <% else %>
-        <p> <i> No review for this rental </i> </p>
-      <% end %>
-      <br>
+      </div>
     <% end %>
   <% else %>
     <h3> <i> This pigeon has never been rented yet! </i> </h3>

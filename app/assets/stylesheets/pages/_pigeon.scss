@@ -31,3 +31,31 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
+
+.card-review {
+  height: 200px;
+  border-radius: $border-radius-xl;
+  margin-bottom: 40px;
+
+  img {
+    width: 200px;
+  }
+
+  &.card-product {
+    align-items: flex-start;
+  }
+
+  .rental-info {
+    font-size: 1em;
+  }
+
+  .comment {
+    font-size: 1em;
+  }
+}
+
+#counter {
+  width: 15px;
+  display: inline-block;
+  text-align: center;
+}
