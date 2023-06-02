@@ -27,7 +27,7 @@ class PigeonsController < ApplicationController
 
   def show
     @user = current_user
-    @rental = Rental.new(service_fee_per_day: 10, tax_rate: 0.2)
+    @rental = Rental.new
     @booked_dates = @pigeon.rentals.map { |rental| { from: rental.start_date, to: rental.end_date } }.uniq
     # @review = Review.find(params[:pigeon_id])
     # @pigeon.reviews = @review

@@ -7,7 +7,7 @@ class Pigeon < ApplicationRecord
 
   has_one_attached :photo
   geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  after_validation :geocode, if: :will_save_change_to_address?, unless: :geocoded?
 
   WEIGHT = ["10g (ex: 1 USB key)",
             "20g (ex: 1 SIM CARD)",
