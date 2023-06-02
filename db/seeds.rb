@@ -13,7 +13,7 @@ user_picture_paths = Dir.glob("#{Rails.root}/app/assets/images/users/*").shuffle
 
 # 10 regular users
 counter = 0
-10.times do
+30.times do
   user = User.new(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -28,7 +28,7 @@ end
 
 # 50 pigeons
 counter = 0
-50.times do
+60.times do
   user_offset = rand(User.count)
   coords = france_coordinates.pop
   pigeon = Pigeon.new(
