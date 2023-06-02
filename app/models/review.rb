@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :rental
-  attribute :comment, :string, default: '...'
+  attribute :comment, :string, default: ''
   attribute :rating, :integer, default: 5
 
   validates :comment, presence: true
