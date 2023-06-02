@@ -10,8 +10,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <% if action_name == "index" %>
+      <%= render "search_form" %>
+    <% end %>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
 
         <% if user_signed_in? %>
@@ -33,7 +36,6 @@
         <% end %>
 
       </ul>
-
     </div>
   </div>
 </div>

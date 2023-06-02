@@ -14,6 +14,7 @@ export default class extends Controller {
     })
     this.geocoder.addTo(this.element);
     this.geocoder.setInput(this.defaultValue);
+    this.geocoder.setPlaceholder("Where?");
     this.geocoder.on("result", event => this.#setInputValue(event));
     this.geocoder.on("clear", () => this.#clearInputValue());
   }

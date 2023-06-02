@@ -3,6 +3,15 @@
   background-color: white;
   border-radius: $border-radius-lg;
 
+  form {
+    border-radius: 10px;
+    border: 2px solid #670AFF;
+  }
+
+  .datepicker-container {
+    position: relative;
+  }
+
   .form-control {
     height: 100%;
   }
@@ -11,9 +20,29 @@
   .mapboxgl-ctrl-geocoder--input {
     height: 100%;
     width: 100%;
+    text-align: center;
     min-width: auto;
     border-radius: 0px;
     background-color: $light-gray;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .mapboxgl-ctrl-geocoder--input:focus {
+    border-color: #b385ff;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(103, 11, 255, 0.25);
+  }
+
+  .mapboxgl-ctrl-geocoder--button {
+    background-color: transparent;
+  }
+
+  .calendar-icon {
+    position: absolute;
+    width: 14px;
+    top: 11px;
+    left: 12px;
+    fill: #757575;
   }
 
   form input {
@@ -32,5 +61,12 @@
 @media screen and (min-width: 640px) {
   .search-form .mapboxgl-ctrl-geocoder--icon {
       top: 10px;
+  }
+  .mapboxgl-ctrl-geocoder--icon-close {
+    margin-top: 5px;
+  }
+  .datepicker-container,
+  .address-container {
+    min-width: 300px;
   }
 }

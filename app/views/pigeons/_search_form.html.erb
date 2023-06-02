@@ -1,4 +1,4 @@
-<div class="search-form mt-4">
+<div class="search-form">
   <%= form_with url: pigeons_path,
                 id: "search-form",
                 method: "get",
@@ -8,23 +8,23 @@
                   action: "submit->search-form#send",
                   turbo: "false"
                 } do |f| %>
-    <div class="flex-grow-1">
+    <div class="flex-grow-1 datepicker-container">
       <%= f.text_field :dates,
-        class: "form-control",
-        placeholder: "Dates",
+        class: "form-control text-center",
+        placeholder: "When?",
         data: {
           controller: "datepicker",
           datepicker_default_dates_value: [params[:start_date], params[:end_date]]
         }
        %>
     </div>
-    <div class="flex-grow-1"
+    <div class="flex-grow-1 address-container"
          data-controller="address-autocomplete"
          data-address-autocomplete-default-value="<%= params[:address] %>"
          data-address-autocomplete-api-key-value="<%= ENV["MAPBOX_ACCESS_TOKEN"] %>">
       <%= f.text_field :address,
         class: "d-none",
-        placeholder: "Address",
+        placeholder: "Where?",
         data: {
           address_autocomplete_target: "address",
         }
