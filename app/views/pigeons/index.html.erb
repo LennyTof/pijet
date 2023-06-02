@@ -22,6 +22,7 @@
                     data-longitude=<%= pigeon.longitude %>>
                   <div class="card-img-container">
                     <%= cl_image_tag pigeon.photo.key, crop: :fill, class: "card-img-top" %>
+                    <%= cl_image_tag pigeon.user.photo.key, crop: :fill, class: "card-avatar" %>
                   </div>
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -32,10 +33,13 @@
                       <%= pigeon.description %>
                     </p>
                   </div>
-                  <div class="card-footer">
-                    <p class="card-text">
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div>
                       <strong><%= pigeon.price %>€</strong> per day
-                    </p>
+                    </div>
+                    <div>
+                      <%= pigeon.maximum_payload_weight %>g max
+                    </div>
                   </div>
                 </div>
               <% end %>
