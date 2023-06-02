@@ -7,31 +7,34 @@
      data-book-form-payload-value="<%= Rental::PAYLOAD_TYPES.to_json %>"
      data-book-form-max-weight-value=<%= pigeon.maximum_payload_weight %>
      >
-  <h2><%= pigeon.price %>€ per day</h2>
+  <h2 class="mt-0 mb-3"><%= pigeon.price %>€ per day</h2>
 
   <%= simple_form_for rental, url: book_path(pigeon), data: { action: "change->book-form#update" } do |f| %>
     <%= f.input :start_date,
         as: :string,
         label: "Dates",
+        label_html: { class: "fs-5 fw-bold" },
         input_html: {
           data: {
             controller: "datepicker",
             datepicker_booked_dates_value: booked_dates.to_json,
             book_form_target: "dates"
           }
-        }
+        },
+        wrapper_html: { class: "mb-4" }
     %>
     <%= f.input :payload_weight,
+        label_html: { class: "fs-5 fw-bold" },
         input_html: { data: { book_form_target: "weight" } },
         wrapper_html: { class: "d-none" }
     %>
 
     <div class="flex-between">
-      Payload Types:
+      <div class="fs-5 fw-bold">Payload:</div>
       <% Rental::PAYLOAD_TYPES.each do |pt| %>
         <div class="actions">
           <div class="counter-load">
-            <span><%= pt[:name] %> <%= pt[:weight] %>g</span>
+            <span><%= pt[:name] %> (<%= pt[:weight] %>g)</span>
             <div>
               <span class="btn btn-outline-primary round-bordered" data-action="click->book-form#calculateMinus">-</span>
               <span id="counter" data-book-form-target='quantity'>0</span>
@@ -41,7 +44,10 @@
           </div>
         </div>
       <% end %>
-        <p><span data-book-form-target='sum'>0</span><span>g</span></p>
+      <hr>
+      <p class="text-end fs-5">
+        Total weight: <span data-book-form-target='sum'>0</span>g
+      </p>
     </div>
     <%= f.submit "Book #{pigeon.name}", class: "mt-3 btn btn-lg btn-primary w-100" %>
   <% end %>
