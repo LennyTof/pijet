@@ -20,6 +20,7 @@
 
   .form-control {
     height: 100%;
+    border: none;
   }
 
   .mapboxgl-ctrl-geocoder,
@@ -31,6 +32,7 @@
     border-radius: 0px;
     background-color: $light-gray;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border: none;
   }
 
   .mapboxgl-ctrl-geocoder--input:focus {
